@@ -31,5 +31,8 @@ module player_sprite #(
     output wire       px_on
     );
     
-        assign px_on = (x >= player_x) && (x < player_x + PLAYER_W) && (y >= player_y) && (y < player_y + PLAYER_H);
+    wire in_bounds = (x >= player_x) && (x < player_x + PLAYER_W) && 
+                     (y >= player_y) && (y < player_y + PLAYER_H);
+    
+    assign px_on = in_bounds;
 endmodule

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2015.4 (64-bit)
+# SW Build 1412921 on Wed Nov 18 09:43:45 MST 2015
+# IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
+# Start of session at: Thu Dec 11 13:58:28 2025
+# Process ID: 30744
+# Current directory: D:/Y2_ALL/CPE_digital/GAniga/Ganiga.runs/impl_1
+# Command line: vivado.exe -log top_module.vdi -applog -messageDb vivado.pb -mode batch -source top_module.tcl -notrace
+# Log file: D:/Y2_ALL/CPE_digital/GAniga/Ganiga.runs/impl_1/top_module.vdi
+# Journal file: D:/Y2_ALL/CPE_digital/GAniga/Ganiga.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source top_module.tcl -notrace

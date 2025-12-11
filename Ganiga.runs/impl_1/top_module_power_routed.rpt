@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-| Date             : Thu Dec 11 12:42:58 2025
+| Date             : Thu Dec 11 13:58:53 2025
 | Host             : Kawiii running 64-bit major release  (build 9200)
 | Command          : 
 | Design           : top_module
@@ -30,12 +30,12 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 2.333 |
-| Dynamic (W)              | 2.267 |
+| Total On-Chip Power (W)  | 2.702 |
+| Dynamic (W)              | 2.635 |
 | Device Static (W)        | 0.066 |
 | Effective TJA (C/W)      | 5.0   |
-| Max Ambient (C)          | 88.3  |
-| Junction Temperature (C) | 36.7  |
+| Max Ambient (C)          | 86.5  |
+| Junction Temperature (C) | 38.5  |
 | Confidence Level         | Low   |
 | Setting File             | ---   |
 | Simulation Activity File | ---   |
@@ -49,16 +49,17 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     0.602 |      319 |       --- |             --- |
-|   LUT as Logic |     0.525 |      134 |     20800 |            0.64 |
-|   CARRY4       |     0.044 |       21 |      8150 |            0.26 |
-|   Register     |     0.028 |      108 |     41600 |            0.26 |
+| Slice Logic    |     0.773 |      392 |       --- |             --- |
+|   LUT as Logic |     0.691 |      166 |     20800 |            0.80 |
+|   CARRY4       |     0.050 |       26 |      8150 |            0.32 |
+|   Register     |     0.028 |      121 |     41600 |            0.29 |
 |   BUFG         |     0.005 |        1 |        32 |            3.13 |
-|   Others       |     0.000 |        7 |       --- |             --- |
-| Signals        |     0.400 |      204 |       --- |             --- |
-| I/O            |     1.265 |       22 |       106 |           20.75 |
+|   Others       |     0.000 |       12 |       --- |             --- |
+| Signals        |     0.594 |      262 |       --- |             --- |
+| Block RAM      |     0.000 |      0.5 |        50 |            1.00 |
+| I/O            |     1.268 |       22 |       106 |           20.75 |
 | Static Power   |     0.066 |          |           |                 |
-| Total          |     2.333 |          |           |                 |
+| Total          |     2.702 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -68,7 +69,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       0.950 |     1.092 |       1.083 |      0.009 |
+| Vccint    |       0.950 |     1.477 |       1.467 |      0.010 |
 | Vccaux    |       1.800 |     0.057 |       0.045 |      0.012 |
 | Vcco33    |       3.300 |     0.352 |       0.351 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -132,13 +133,22 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+---------------+-----------+
-| Name          | Power (W) |
-+---------------+-----------+
-| top_module    |     2.267 |
-|   bullet_i    |     0.098 |
-|   game_tick_i |     0.258 |
-|   u1          |     0.597 |
-+---------------+-----------+
++-------------------------------------------+-----------+
+| Name                                      | Power (W) |
++-------------------------------------------+-----------+
+| top_module                                |     2.635 |
+|   bullet_i                                |     0.118 |
+|   game_tick_i                             |     0.253 |
+|   ren                                     |     0.024 |
+|     player_sprite_i                       |     0.024 |
+|       player_rom                          |     0.000 |
+|         U0                                |     0.000 |
+|           inst_blk_mem_gen                |     0.000 |
+|             gnativebmg.native_blk_mem_gen |     0.000 |
+|               valid.cstr                  |     0.000 |
+|                 ramloop[0].ram.r          |     0.000 |
+|                   prim_init.ram           |     0.000 |
+|   u1                                      |     0.921 |
++-------------------------------------------+-----------+
 
 

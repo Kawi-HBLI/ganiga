@@ -87,17 +87,18 @@ module top_module(
         end
     end
     renderer ren(
-        .blank    (blank),
-        .x        (x),
-        .y        (y),
-        .player_x (player_x),
-        .player_y (player_y),
-        .bullet_active (bullet_active),
-        .bullet_x (bullet_x),
-        .bullet_y (bullet_y),
-        .r        (r),
-        .g        (g),
-        .b        (b)
+        .clk         (CLK100MHZ),   // ???????????
+        .blank       (blank),
+        .x           (x),
+        .y           (y),
+        .player_x    (player_x),
+        .player_y    (player_y),
+        .bullet_active(bullet_active),
+        .bullet_x    (bullet_x),
+        .bullet_y    (bullet_y),
+        .r           (r),
+        .g           (g),
+        .b           (b)
     );
     
     bullet bullet_i(

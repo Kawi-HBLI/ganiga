@@ -78,10 +78,10 @@ module game_engine #(
         .clk   (clk),
         .rst_ni(logic_rst_ni),
         .tick  (tick),
-        .left  (btn_left),
-        .right (btn_right),
-        .player_x(player_x),
-        .player_y(player_y)
+        .btn_left  (btn_left),
+        .btn_right (btn_right),
+        .x(player_x),
+        .y(player_y)
     );
 
     // ---------------------------

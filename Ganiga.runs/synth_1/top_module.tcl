@@ -18,11 +18,15 @@ add_files D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player.coe
 read_mem D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_1.mem
 read_verilog -library xil_defaultlib {
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_sprite_rom.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_sprite.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_control.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_control.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_sprite.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/bullet.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_engine.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/vga_sync.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/renderer.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_tick.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/bullet.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/top_module.v
 }
 read_xdc D:/Y2_ALL/CPE_digital/lab10/Ganiga/ganiga.srcs/constrs_1/new/Ganiga_constraints.xdc

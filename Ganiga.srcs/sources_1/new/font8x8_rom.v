@@ -1,116 +1,38 @@
+`timescale 1ns / 1ps
+// Simple 8x8 font ROM (MSB = leftmost pixel)
+// Includes glyphs needed for: "MENU" and "<FIRE> TO START"
 module font8x8_rom(
     input  wire [7:0] ch,     // ASCII
     input  wire [2:0] row,    // 0..7
-    output reg  [7:0] bits    // MSB = left pixel
+    output reg  [7:0] bits    // bitmap row
 );
 always @(*) begin
     bits = 8'b00000000;
     case (ch)
         " ": bits = 8'b00000000;
 
-        // Digits 0-9
-        "0": case(row)
-            0: bits=8'b00111100;
-            1: bits=8'b01100110;
-            2: bits=8'b01101110;
-            3: bits=8'b01110110;
-            4: bits=8'b01100110;
-            5: bits=8'b01100110;
-            6: bits=8'b00111100;
-            default: bits=8'b00000000;
-        endcase
-        "1": case(row)
-            0: bits=8'b00011000;
-            1: bits=8'b00111000;
+        "<": case(row)
+            0: bits=8'b00000110;
+            1: bits=8'b00001100;
             2: bits=8'b00011000;
-            3: bits=8'b00011000;
+            3: bits=8'b00110000;
             4: bits=8'b00011000;
-            5: bits=8'b00011000;
-            6: bits=8'b00111100;
-            default: bits=8'b00000000;
-        endcase
-        "2": case(row)
-            0: bits=8'b00111100;
-            1: bits=8'b01100110;
-            2: bits=8'b00000110;
-            3: bits=8'b00001100;
-            4: bits=8'b00110000;
-            5: bits=8'b01100000;
-            6: bits=8'b01111110;
-            default: bits=8'b00000000;
-        endcase
-        "3": case(row)
-            0: bits=8'b00111100;
-            1: bits=8'b01100110;
-            2: bits=8'b00000110;
-            3: bits=8'b00011100;
-            4: bits=8'b00000110;
-            5: bits=8'b01100110;
-            6: bits=8'b00111100;
-            default: bits=8'b00000000;
-        endcase
-        "4": case(row)
-            0: bits=8'b00001100;
-            1: bits=8'b00011100;
-            2: bits=8'b00101100;
-            3: bits=8'b01001100;
-            4: bits=8'b01111110;
             5: bits=8'b00001100;
-            6: bits=8'b00001100;
+            6: bits=8'b00000110;
             default: bits=8'b00000000;
         endcase
-        "5": case(row)
-            0: bits=8'b01111110;
-            1: bits=8'b01100000;
-            2: bits=8'b01111100;
-            3: bits=8'b00000110;
-            4: bits=8'b00000110;
-            5: bits=8'b01100110;
-            6: bits=8'b00111100;
-            default: bits=8'b00000000;
-        endcase
-        "6": case(row)
-            0: bits=8'b00111100;
-            1: bits=8'b01100110;
-            2: bits=8'b01100000;
-            3: bits=8'b01111100;
-            4: bits=8'b01100110;
-            5: bits=8'b01100110;
-            6: bits=8'b00111100;
-            default: bits=8'b00000000;
-        endcase
-        "7": case(row)
-            0: bits=8'b01111110;
-            1: bits=8'b00000110;
-            2: bits=8'b00001100;
-            3: bits=8'b00011000;
-            4: bits=8'b00110000;
+        ">": case(row)
+            0: bits=8'b01100000;
+            1: bits=8'b00110000;
+            2: bits=8'b00011000;
+            3: bits=8'b00001100;
+            4: bits=8'b00011000;
             5: bits=8'b00110000;
-            6: bits=8'b00110000;
-            default: bits=8'b00000000;
-        endcase
-        "8": case(row)
-            0: bits=8'b00111100;
-            1: bits=8'b01100110;
-            2: bits=8'b01100110;
-            3: bits=8'b00111100;
-            4: bits=8'b01100110;
-            5: bits=8'b01100110;
-            6: bits=8'b00111100;
-            default: bits=8'b00000000;
-        endcase
-        "9": case(row)
-            0: bits=8'b00111100;
-            1: bits=8'b01100110;
-            2: bits=8'b01100110;
-            3: bits=8'b00111110;
-            4: bits=8'b00000110;
-            5: bits=8'b01100110;
-            6: bits=8'b00111100;
+            6: bits=8'b01100000;
             default: bits=8'b00000000;
         endcase
 
-        // Letters needed: A C E F G I M N O R S T U V
+        // Letters
         "A": case(row)
             0: bits=8'b00011000;
             1: bits=8'b00111100;
@@ -119,16 +41,6 @@ always @(*) begin
             4: bits=8'b01111110;
             5: bits=8'b01100110;
             6: bits=8'b01100110;
-            default: bits=8'b00000000;
-        endcase
-        "C": case(row)
-            0: bits=8'b00111100;
-            1: bits=8'b01100110;
-            2: bits=8'b01100000;
-            3: bits=8'b01100000;
-            4: bits=8'b01100000;
-            5: bits=8'b01100110;
-            6: bits=8'b00111100;
             default: bits=8'b00000000;
         endcase
         "E": case(row)
@@ -149,16 +61,6 @@ always @(*) begin
             4: bits=8'b01100000;
             5: bits=8'b01100000;
             6: bits=8'b01100000;
-            default: bits=8'b00000000;
-        endcase
-        "G": case(row)
-            0: bits=8'b00111100;
-            1: bits=8'b01100110;
-            2: bits=8'b01100000;
-            3: bits=8'b01101110;
-            4: bits=8'b01100110;
-            5: bits=8'b01100110;
-            6: bits=8'b00111100;
             default: bits=8'b00000000;
         endcase
         "I": case(row)
@@ -241,33 +143,7 @@ always @(*) begin
             6: bits=8'b00111100;
             default: bits=8'b00000000;
         endcase
-        "V": case(row)
-            0: bits=8'b01100110;
-            1: bits=8'b01100110;
-            2: bits=8'b01100110;
-            3: bits=8'b01100110;
-            4: bits=8'b01100110;
-            5: bits=8'b00111100;
-            6: bits=8'b00011000;
-            default: bits=8'b00000000;
-        endcase
 
-        "<": case(row)
-            1: bits=8'b00001100;
-            2: bits=8'b00011000;
-            3: bits=8'b00110000;
-            4: bits=8'b00011000;
-            5: bits=8'b00001100;
-            default: bits=8'b00000000;
-        endcase
-        ">": case(row)
-            1: bits=8'b00110000;
-            2: bits=8'b00011000;
-            3: bits=8'b00001100;
-            4: bits=8'b00011000;
-            5: bits=8'b00110000;
-            default: bits=8'b00000000;
-        endcase
         default: bits = 8'b00000000;
     endcase
 end

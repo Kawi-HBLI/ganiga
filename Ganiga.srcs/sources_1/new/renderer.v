@@ -215,7 +215,12 @@ module renderer(
         end else if (px_enemy) begin
             r = e_r; g = e_g; b = e_b;
         end else begin
-            r = 0; g = 0; b = 4'h1;
+            // ถ้าคุณมีเมนู: ตอน menu ให้พื้นหลังโล่ง, ตอนเล่นให้ใช้ map
+            if (!game_playing) begin
+                r = 0; g = 0; b = 0; // menu background
+            end else begin
+                r = map_r; g = map_g; b = map_b; // <<< ใช้สีจาก tile_map
+            end
         end
     end
 

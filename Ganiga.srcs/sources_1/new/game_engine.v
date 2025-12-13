@@ -19,13 +19,12 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module game_engine #(
-    parameter ENEMY_MOVE_DELAY = 30,
-    parameter ENEMY_STEP_X     = 1,
-    parameter ENEMY_STEP_Y     = 10
-) (
-
+    parameter ENEMY_MOVE_DELAY  = 30,
+    parameter ENEMY_STEP_X      = 1,
+    parameter ENEMY_STEP_Y      = 10,
+    parameter ENEMY_GAME_OVER_Y = 440
+)(
     input wire clk,
     input wire rst_ni,
     input wire tick,
@@ -41,65 +40,132 @@ module game_engine #(
     output wire [4:0] enemies_alive,
     output wire [9:0] enemy_group_x,
     output wire [9:0] enemy_group_y,
-    output wire       game_playing
+
+    output wire       game_playing,   // 1 = PLAY
+    output wire       game_over,      // 1 = GAME OVER screen
+    output reg  [3:0] score_h,        // BCD hundreds
+    output reg  [3:0] score_t,        // BCD tens
+    output reg  [3:0] score_o         // BCD ones
 );
 
-    // MENU controller
-    menu_fsm u_menu(
+    // 0 MENU, 1 PLAY, 2 OVER
+    reg [1:0] state;
+    localparam ST_MENU = 2'd0;
+    localparam ST_PLAY = 2'd1;
+    localparam ST_OVER = 2'd2;
+
+    assign game_playing = (state == ST_PLAY);
+    assign game_over    = (state == ST_OVER);
+
+    // gate submodules so they reset outside PLAY
+    wire sub_rst_ni = rst_ni && (state == ST_PLAY);
+
+    // player
+    player_control u_player(
         .clk(clk),
-        .rst_ni(rst_ni),
+        .rst_ni(sub_rst_ni),
         .tick(tick),
-        .btn_fire(btn_fire),
-        .game_playing(game_playing)
+        .btn_left(btn_left),
+        .btn_right(btn_right),
+        .player_x(player_x),
+        .player_y(player_y)
     );
 
-    // Gate submodules so they reset/hold during MENU
-    wire rst_game_ni = rst_ni & game_playing;
-    wire fire_game   = btn_fire & game_playing;
-
-    // Internal wires for interaction
-    wire b_act_raw;
-    wire [9:0] b_x_raw, b_y_raw;
+    // bullet
     wire bullet_hit_ack;
-
-    // Player Control
-    player_control #(
-        .START_X(320),
-        .START_Y(440),
-        .SPEED(4)
-    ) p_ctrl (
-        .clk(clk), .rst_ni(rst_game_ni), .tick(tick),
-        .btn_left(btn_left), .btn_right(btn_right),
-        .x(player_x), .y(player_y)
+    bullet u_bullet(
+        .clk(clk),
+        .rst_ni(sub_rst_ni),
+        .tick(tick),
+        .fire(btn_fire),
+        .player_x(player_x),
+        .player_y(player_y),
+        .hit(bullet_hit_ack),
+        .active(bullet_active),
+        .x(bullet_x),
+        .y(bullet_y)
     );
 
-    // Enemy Control
+    // enemies
+    wire enemy_go;
     enemy_control #(
-        .MOVE_DELAY(ENEMY_MOVE_DELAY),
-        .STEP_X(ENEMY_STEP_X),
-        .STEP_Y(ENEMY_STEP_Y)
-    ) e_ctrl (
-        .clk(clk), .rst_ni(rst_game_ni), .tick(tick),
-        .bullet_active(b_act_raw),
-        .bullet_x(b_x_raw),
-        .bullet_y(b_y_raw),
+        .MOVE_DELAY (ENEMY_MOVE_DELAY),
+        .STEP_X     (ENEMY_STEP_X),
+        .STEP_Y     (ENEMY_STEP_Y),
+        .GAME_OVER_Y(ENEMY_GAME_OVER_Y)
+    ) u_enemy(
+        .clk(clk),
+        .rst_ni(sub_rst_ni),
+        .tick(tick),
+        .bullet_active(bullet_active),
+        .bullet_x(bullet_x),
+        .bullet_y(bullet_y),
         .bullet_hit_ack(bullet_hit_ack),
         .enemies_alive(enemies_alive),
         .group_x(enemy_group_x),
-        .group_y(enemy_group_y)
+        .group_y(enemy_group_y),
+        .game_over(enemy_go)
     );
 
-    // Bullet
-    bullet bullet_inst (
-        .clk(clk), .rst_ni(rst_game_ni), .fire(fire_game), .tick(tick),
-        .hit(bullet_hit_ack),
-        .player_x(player_x), .player_y(player_y),
-        .active(b_act_raw),
-        .bullet_x(b_x_raw), .bullet_y(b_y_raw)
-    );
+    // BCD add +5
+    reg [3:0] nh, nt, no;
 
-    assign bullet_active = b_act_raw && !bullet_hit_ack;
-    assign bullet_x = b_x_raw;
-    assign bullet_y = b_y_raw;
+    always @(posedge clk or negedge rst_ni) begin
+        if (!rst_ni) begin
+            state   <= ST_MENU;
+            score_h <= 0;
+            score_t <= 0;
+            score_o <= 0;
+        end else begin
+            // ---------- state transitions ----------
+            case (state)
+                ST_MENU: begin
+                    if (btn_fire) begin
+                        state   <= ST_PLAY;
+                        score_h <= 0; score_t <= 0; score_o <= 0;
+                    end
+                end
 
+                ST_PLAY: begin
+                    if (enemy_go) begin
+                        state <= ST_OVER;
+                    end
+                end
+
+                ST_OVER: begin
+                    if (btn_fire) begin
+                        state   <= ST_PLAY;
+                        score_h <= 0; score_t <= 0; score_o <= 0;
+                    end
+                end
+            endcase
+
+            // ---------- score update (PLAY only) ----------
+            if (state == ST_PLAY && bullet_hit_ack) begin
+                // start from current
+                nh = score_h;
+                nt = score_t;
+                no = score_o;
+
+                // ones += 5
+                if (no <= 4) begin
+                    no = no + 4'd5;
+                end else begin
+                    no = no - 4'd5; // carry
+                    // tens += 1
+                    if (nt == 9) begin
+                        nt = 0;
+                        if (nh != 9) nh = nh + 1;
+                        else nh = 9; // clamp at 999
+                    end else begin
+                        nt = nt + 1;
+                    end
+                end
+
+                score_h <= nh;
+                score_t <= nt;
+                score_o <= no;
+            end
+        end
+    end
 endmodule

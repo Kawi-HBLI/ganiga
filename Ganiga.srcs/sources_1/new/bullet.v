@@ -34,8 +34,8 @@ module bullet #(
             end
 
             if (active && tick) begin
-                if (bullet_y > 4)
-                    bullet_y <= bullet_y - 4;    // bullet speed
+                if (bullet_y > 10)
+                    bullet_y <= bullet_y - 10;    // bullet speed
                 else
                     active <= 1'b0;
             end

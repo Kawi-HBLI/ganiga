@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-| Date         : Thu Dec 11 14:46:08 2025
+| Date         : Sat Dec 13 10:04:10 2025
 | Host         : Kawiii running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_module_control_sets_placed.rpt
 | Design       : top_module
@@ -22,8 +22,8 @@ Table of Contents
 +-------------------------------------------------------------------+-------+
 |                               Status                              | Count |
 +-------------------------------------------------------------------+-------+
-| Number of unique control sets                                     |     7 |
-| Minimum Number of register sites lost to control set restrictions |    43 |
+| Number of unique control sets                                     |    10 |
+| Minimum Number of register sites lost to control set restrictions |    54 |
 +-------------------------------------------------------------------+-------+
 
 
@@ -33,28 +33,31 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              26 |            9 |
+| No           | No                    | No                     |              26 |           14 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |              34 |           16 |
+| No           | Yes                   | No                     |              40 |           19 |
 | Yes          | No                    | No                     |               0 |            0 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |              49 |           16 |
+| Yes          | Yes                   | No                     |              72 |           26 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 3. Detailed Control Set Information
 -----------------------------------
 
-+----------------------+------------------------------+-----------------------+------------------+----------------+
-|     Clock Signal     |         Enable Signal        |    Set/Reset Signal   | Slice Load Count | Bel Load Count |
-+----------------------+------------------------------+-----------------------+------------------+----------------+
-|  CLK100MHZ_IBUF_BUFG | bullet_i/bullet_y[9]_i_1_n_0 | BTNC_IBUF             |                3 |              9 |
-|  CLK100MHZ_IBUF_BUFG | u1/xc_next[9]_i_2_n_0        | u1/xc_next0           |                3 |             10 |
-|  CLK100MHZ_IBUF_BUFG | u1/xc_next0                  | u1/yc_next[9]_i_1_n_0 |                3 |             10 |
-|  CLK100MHZ_IBUF_BUFG | game_tick_i/E[0]             | BTNC_IBUF             |                4 |             10 |
-|  CLK100MHZ_IBUF_BUFG | bullet_i/active0             | BTNC_IBUF             |                3 |             10 |
-|  CLK100MHZ_IBUF_BUFG |                              |                       |                9 |             26 |
-|  CLK100MHZ_IBUF_BUFG |                              | BTNC_IBUF             |               16 |             34 |
-+----------------------+------------------------------+-----------------------+------------------+----------------+
++----------------------+-------------------------------------+-----------------------+------------------+----------------+
+|     Clock Signal     |            Enable Signal            |    Set/Reset Signal   | Slice Load Count | Bel Load Count |
++----------------------+-------------------------------------+-----------------------+------------------+----------------+
+|  CLK100MHZ_IBUF_BUFG | game_tick_i/tick_o                  | BTNC_IBUF             |                2 |              6 |
+|  CLK100MHZ_IBUF_BUFG | game_tick_i/enemy_group_y_reg[9][0] | BTNC_IBUF             |                2 |              9 |
+|  CLK100MHZ_IBUF_BUFG | game_tick_i/E[0]                    | BTNC_IBUF             |                3 |              9 |
+|  CLK100MHZ_IBUF_BUFG | bullet_i/bullet_y[9]_i_1_n_0        | BTNC_IBUF             |                2 |              9 |
+|  CLK100MHZ_IBUF_BUFG | bullet_i/bullet_x[9]_i_1_n_0        | BTNC_IBUF             |                4 |              9 |
+|  CLK100MHZ_IBUF_BUFG | u1/xc_next[9]_i_2_n_0               | u1/xc_next0           |                4 |             10 |
+|  CLK100MHZ_IBUF_BUFG | u1/xc_next0                         | u1/yc_next[9]_i_1_n_0 |                5 |             10 |
+|  CLK100MHZ_IBUF_BUFG | game_tick_i/enemy_group_x_reg[0][0] | BTNC_IBUF             |                4 |             10 |
+|  CLK100MHZ_IBUF_BUFG |                                     |                       |               14 |             26 |
+|  CLK100MHZ_IBUF_BUFG |                                     | BTNC_IBUF             |               19 |             40 |
++----------------------+-------------------------------------+-----------------------+------------------+----------------+
 
 

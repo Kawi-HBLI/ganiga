@@ -27,6 +27,13 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/new/player_sprite_rom.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/new/player_sprite.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -64,14 +71,6 @@
       </File>
       <File Path="$PSRCDIR/sources_1/new/top_module.v">
         <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/new/player_sprite_rom.v">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -148,23 +147,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player.coe"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_0.xml"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_0.veo"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_0_sim_netlist.vhdl"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_0_sim_netlist.v"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="synth/blk_mem_gen_0.vhd"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_v8_3_1/hdl/blk_mem_gen_v8_3.vhd"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_v8_3_1/hdl/blk_mem_gen_v8_3_vhsyn_rfs.vhd"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="sim/blk_mem_gen_0.vhd"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_0.mif"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="doc/blk_mem_gen_v8_3_changelog.txt"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_0_stub.v"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="summary.log"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_0_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_0_stub.vhdl"/>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="blk_mem_gen_0.vho"/>
       </File>
       <Config>
         <Option Name="TopModule" Val="blk_mem_gen_0"/>

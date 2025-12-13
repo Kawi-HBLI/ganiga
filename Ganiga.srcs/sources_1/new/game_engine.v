@@ -19,6 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+
 module game_engine(
     input wire clk,
     input wire rst_ni,
@@ -37,10 +38,10 @@ module game_engine(
     output wire [9:0] enemy_group_y
     );
 
-    // Internal wires for interaction
-    wire b_act_raw;
-    wire [9:0] b_x_raw, b_y_raw;
-    wire bullet_hit_ack;
+    // Internal wires
+    wire bullet_hit_ack; // ?????????????????????? Enemy ??? Bullet
+    wire b_act_internal;
+    wire [9:0] b_x_int, b_y_int;
 
     // 1. Player Control
     player_control #( .START_X(320), .START_Y(440), .SPEED(4) ) p_ctrl (
@@ -49,15 +50,17 @@ module game_engine(
         .x(player_x), .y(player_y)
     );
 
-    // 2. Enemy Control (New Module)
-    enemy_control e_ctrl (
+    // 2. Enemy Control (???? Speed ?????????)
+    enemy_control #(
+        .MOVE_DELAY(30), // ???????????-?????????? (??????? = ????)
+        .STEP_X(1),      // ???????????????????
+        .STEP_Y(10)      // ??????????
+    ) e_ctrl (
         .clk(clk), .rst_ni(rst_ni), .tick(tick),
-        // Bullet interaction
-        .bullet_active(b_act_raw),
-        .bullet_x(b_x_raw),
-        .bullet_y(b_y_raw),
-        .bullet_hit_ack(bullet_hit_ack),
-        // Outputs
+        .bullet_active(b_act_internal),
+        .bullet_x(b_x_int),
+        .bullet_y(b_y_int),
+        .bullet_hit_ack(bullet_hit_ack), // ????????????????
         .enemies_alive(enemies_alive),
         .group_x(enemy_group_x),
         .group_y(enemy_group_y)
@@ -66,14 +69,15 @@ module game_engine(
     // 3. Bullet Logic
     bullet bullet_inst (
         .clk(clk), .rst_ni(rst_ni), .fire(btn_fire), .tick(tick),
+        .hit(bullet_hit_ack),          // [NEW] ?????????????????
         .player_x(player_x), .player_y(player_y),
-        .active(b_act_raw), 
-        .bullet_x(b_x_raw), .bullet_y(b_y_raw)
+        .active(b_act_internal), 
+        .bullet_x(b_x_int), .bullet_y(b_y_int)
     );
-
-    // Filter bullet active signal when hit
-    assign bullet_active = b_act_raw && !bullet_hit_ack; 
-    assign bullet_x = b_x_raw;
-    assign bullet_y = b_y_raw;
+    
+    // Output assignment
+    assign bullet_active = b_act_internal; // ??????? mask ???? ????? active ?????????????????
+    assign bullet_x = b_x_int;
+    assign bullet_y = b_y_int;
 
 endmodule

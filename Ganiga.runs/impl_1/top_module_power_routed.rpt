@@ -1,8 +1,8 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-| Date             : Mon Dec 15 12:20:59 2025
-| Host             : Kawiii running 64-bit major release  (build 9200)
+| Date             : Mon Dec 15 13:02:00 2025
+| Host             : MSI running 64-bit major release  (build 9200)
 | Command          : 
 | Design           : top_module
 | Device           : xc7a35ticpg236-1L
@@ -30,12 +30,12 @@ Table of Contents
 ----------
 
 +--------------------------+--------+
-| Total On-Chip Power (W)  | 10.723 |
-| Dynamic (W)              | 10.610 |
-| Device Static (W)        | 0.113  |
+| Total On-Chip Power (W)  | 11.328 |
+| Dynamic (W)              | 11.208 |
+| Device Static (W)        | 0.120  |
 | Effective TJA (C/W)      | 5.0    |
-| Max Ambient (C)          | 46.4   |
-| Junction Temperature (C) | 78.6   |
+| Max Ambient (C)          | 43.4   |
+| Junction Temperature (C) | 81.6   |
 | Confidence Level         | Low    |
 | Setting File             | ---    |
 | Simulation Activity File | ---    |
@@ -49,18 +49,18 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     3.597 |     1614 |       --- |             --- |
-|   LUT as Logic |     3.294 |      905 |     20800 |            4.35 |
+| Slice Logic    |     3.884 |     1659 |       --- |             --- |
+|   LUT as Logic |     3.556 |      932 |     20800 |            4.48 |
 |   CARRY4       |     0.233 |      142 |      8150 |            1.74 |
 |   Register     |     0.063 |      270 |     41600 |            0.65 |
+|   F7/F8 Muxes  |     0.028 |       29 |     32600 |            0.09 |
 |   BUFG         |     0.005 |        1 |        32 |            3.13 |
-|   F7/F8 Muxes  |     0.002 |        3 |     32600 |           <0.01 |
 |   Others       |     0.000 |       24 |       --- |             --- |
-| Signals        |     2.810 |      967 |       --- |             --- |
+| Signals        |     3.145 |      964 |       --- |             --- |
 | Block RAM      |    <0.001 |      0.5 |        50 |            1.00 |
-| I/O            |     4.203 |       23 |       106 |           21.70 |
-| Static Power   |     0.113 |          |           |                 |
-| Total          |    10.723 |          |           |                 |
+| I/O            |     4.178 |       20 |       106 |           18.87 |
+| Static Power   |     0.120 |          |           |                 |
+| Total          |    11.328 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -70,9 +70,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       0.950 |     6.823 |       6.777 |      0.046 |
-| Vccaux    |       1.800 |     0.171 |       0.153 |      0.018 |
-| Vcco33    |       3.300 |     1.182 |       1.181 |      0.001 |
+| Vccint    |       0.950 |     7.472 |       7.420 |      0.052 |
+| Vccaux    |       1.800 |     0.171 |       0.152 |      0.019 |
+| Vcco33    |       3.300 |     1.178 |       1.177 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -137,19 +137,19 @@ Table of Contents
 +--------------------+-----------+
 | Name               | Power (W) |
 +--------------------+-----------+
-| top_module         |    10.610 |
-|   engine           |     1.124 |
-|     bullet_inst    |     0.200 |
-|     e_ctrl         |     0.692 |
-|     enemy_bullet_i |     0.118 |
-|     p_ctrl         |     0.107 |
-|     u_menu         |     0.006 |
-|   game_tick_i      |     0.238 |
-|   ren              |     0.017 |
-|     spr_player     |     0.012 |
-|       player_rom   |     0.004 |
-|   uart_inst        |     0.419 |
-|   vga_driver       |     3.793 |
+| top_module         |    11.208 |
+|   engine           |     1.130 |
+|     bullet_inst    |     0.208 |
+|     e_ctrl         |     0.688 |
+|     enemy_bullet_i |     0.127 |
+|     p_ctrl         |     0.101 |
+|     u_menu         |     0.005 |
+|   game_tick_i      |     0.252 |
+|   ren              |     0.020 |
+|     spr_player     |     0.014 |
+|       player_rom   |     0.006 |
+|   uart_inst        |     0.420 |
+|   vga_driver       |     4.416 |
 +--------------------+-----------+
 
 

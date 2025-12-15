@@ -42,3 +42,6 @@ set_property PACKAGE_PIN R19 [get_ports VS]
 set_property PACKAGE_PIN V17 [get_ports sw0]
 set_property PACKAGE_PIN V16 [get_ports sw1]
 set_property PACKAGE_PIN W16 [get_ports sw2]
+
+set_property PACKAGE_PIN B18 [get_ports RsRx]
+set_property IOSTANDARD LVCMOS33 [get_ports RsRx]

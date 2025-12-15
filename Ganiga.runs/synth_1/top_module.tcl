@@ -9,35 +9,35 @@ create_project -in_memory -part xc7a35ticpg236-1L
 
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir D:/Y2_ALL/CPE_digital/GAniga/Ganiga.cache/wt [current_project]
-set_property parent.project_path D:/Y2_ALL/CPE_digital/GAniga/Ganiga.xpr [current_project]
+set_property webtalk.parent_dir {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.cache/wt} [current_project]
+set_property parent.project_path {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.xpr} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property vhdl_version vhdl_2k [current_fileset]
-add_files D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player.coe
-read_mem D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_1.mem
+add_files {{C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/player.coe}}
+read_mem {{C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/player_1.mem}}
 read_verilog -library xil_defaultlib {
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_sprite_rom.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_bullet.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/tile_map.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_control.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/menu_fsm.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_control.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/bullet.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_sprite.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_sprite.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/font8x8_rom.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/ps2_rx.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/keyboard_decoder.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/uart_rx.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/vga_sync.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_tick.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_engine.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/renderer.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/top_module.v
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/player_sprite_rom.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/enemy_bullet.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/tile_map.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/player_control.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/menu_fsm.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/enemy_control.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/bullet.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/enemy_sprite.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/player_sprite.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/font8x8_rom.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/ps2_rx.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/keyboard_decoder.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/uart_rx.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/vga_sync.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/game_tick.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/game_engine.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/renderer.v}
+  {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/sources_1/new/top_module.v}
 }
-read_xdc D:/Y2_ALL/CPE_digital/lab10/Ganiga/ganiga.srcs/constrs_1/new/Ganiga_constraints.xdc
-set_property used_in_implementation false [get_files D:/Y2_ALL/CPE_digital/lab10/Ganiga/ganiga.srcs/constrs_1/new/Ganiga_constraints.xdc]
+read_xdc {{C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/constrs_1/new/Ganiga_constraints.xdc}}
+set_property used_in_implementation false [get_files {{C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.srcs/constrs_1/new/Ganiga_constraints.xdc}}]
 
 synth_design -top top_module -part xc7a35ticpg236-1L
 write_checkpoint -noxdef top_module.dcp

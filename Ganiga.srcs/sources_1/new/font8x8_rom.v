@@ -143,6 +143,16 @@ always @(*) begin
             6: bits=8'b00111100;
             default: bits=8'b00000000;
         endcase
+        "G": case(row)
+            0: bits=8'b00111100; //   ****
+            1: bits=8'b01100110; //  ** **
+            2: bits=8'b01100000; //  **
+            3: bits=8'b01101110; //  ** ***
+            4: bits=8'b01100110; //  ** **
+            5: bits=8'b01100110; //  ** **
+            6: bits=8'b00111100; //   ****
+            default: bits=8'b00000000;
+        endcase
 
         default: bits = 8'b00000000;
     endcase

@@ -25,7 +25,7 @@ module top_module(
     input BTNR,
     input BTNC,
     input BTNU,
-    input sw0, input sw1, input sw2, 
+//    input sw0, input sw1, input sw2, 
     input RsRx,
     output HS,
     output VS,

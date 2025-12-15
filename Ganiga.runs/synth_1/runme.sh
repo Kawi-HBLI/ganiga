@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='D:/Y2_ALL/CPE_digital/GAniga/Ganiga.runs/synth_1'
+HD_PWD='C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

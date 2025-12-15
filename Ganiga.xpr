@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="10" Path="D:/Y2_ALL/CPE_digital/GAniga/Ganiga.xpr">
+<Project Version="7" Minor="10" Path="C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="30eec95b519a4547bf175c1cb5ac5155"/>
@@ -189,7 +189,7 @@
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
       <Filter Type="Constrs"/>
-      <File Path="$PPRDIR/../lab10/Ganiga/ganiga.srcs/constrs_1/new/Ganiga_constraints.xdc">
+      <File Path="$PSRCDIR/constrs_1/new/Ganiga_constraints.xdc">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>

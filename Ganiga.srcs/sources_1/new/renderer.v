@@ -83,7 +83,7 @@ module renderer(
     wire star_on = (~blank) && ((x[3]^y[4]) & (x[7]^y[6]) & ~x[1]);
 
     localparam integer MENU_SCALE = 4;
-    localparam integer MENU_LEN   = 4;
+    localparam integer MENU_LEN   = 6;
     localparam integer MENU_W     = MENU_LEN * 8 * MENU_SCALE;
     localparam integer MENU_H     = 8 * MENU_SCALE;
     localparam integer MENU_X0    = (640 - MENU_W)/2;
@@ -96,13 +96,15 @@ module renderer(
     localparam integer PROMPT_X0    = (640 - PROMPT_W)/2;
     localparam integer PROMPT_Y0    = 300;
 
-    function [7:0] menu_char(input [3:0] idx);
+    function [7:0] menu_char(input [5:0] idx);
         begin
             case(idx)
-                0: menu_char = "M";
-                1: menu_char = "E";
+                0: menu_char = "G";
+                1: menu_char = "A";
                 2: menu_char = "N";
-                3: menu_char = "U";
+                3: menu_char = "I";
+                4: menu_char = "G";
+                5: menu_char = "A";
                 default: menu_char = " ";
             endcase
         end

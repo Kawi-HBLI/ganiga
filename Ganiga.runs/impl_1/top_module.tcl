@@ -50,7 +50,7 @@ set rc [catch {
   create_msg_db write_bitstream.pb
   set_param xicom.use_bs_reader 1
   open_checkpoint top_module_routed.dcp
-  set_property webtalk.parent_dir D:/Y2_ALL/CPE_digital/GAniga/Ganiga.cache/wt [current_project]
+  set_property webtalk.parent_dir {C:/Users/Songwit Rueangsawat/Desktop/CODE/Git/ganiga/Ganiga.cache/wt} [current_project]
   catch { write_mem_info -force top_module.mmi }
   write_bitstream -force top_module.bit 
   catch { write_sysdef -hwdef top_module.hwdef -bitfile top_module.bit -meminfo top_module.mmi -file top_module.sysdef }

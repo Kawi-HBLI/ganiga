@@ -31,6 +31,9 @@ module renderer(
     input  wire       bullet_active,
     input  wire [9:0] bullet_x,
     input  wire [9:0] bullet_y,
+    input  wire       enemy_bullet_active,
+    input  wire [9:0] enemy_bullet_x,
+    input  wire [9:0] enemy_bullet_y,
     input  wire [4:0] enemies_alive,
     input  wire [9:0] enemy_group_x,
     input  wire [9:0] enemy_group_y,
@@ -191,6 +194,11 @@ module renderer(
                      (x >= bullet_x) && (x < bullet_x + BULLET_W) &&
                      (y >= bullet_y) && (y < bullet_y + BULLET_H);
 
+    // Enemy Bullet (same size)
+    wire px_enemy_bullet = enemy_bullet_active &&
+                           (x >= enemy_bullet_x) && (x < enemy_bullet_x + BULLET_W) &&
+                           (y >= enemy_bullet_y) && (y < enemy_bullet_y + BULLET_H);
+
     always @(*) begin
         r = 0; g = 0; b = 0;
 
@@ -212,17 +220,18 @@ module renderer(
             r = p_r; g = p_g; b = p_b;
         end else if (px_bullet) begin
             r = 4'hF; g = 4'hF; b = 4'hF;
+        end else if (px_enemy_bullet) begin
+            r = 4'hF; g = 4'h0; b = 4'h0;
         end else if (px_enemy) begin
             r = e_r; g = e_g; b = e_b;
         end else begin
-            // ถ้าคุณมีเมนู: ตอน menu ให้พื้นหลังโล่ง, ตอนเล่นให้ใช้ map
+            // ????????????: ??? menu ???????????????, ????????????? map
             if (!game_playing) begin
                 r = 0; g = 0; b = 0; // menu background
             end else begin
-                r = map_r; g = map_g; b = map_b; // <<< ใช้สีจาก tile_map
+                r = map_r; g = map_g; b = map_b; // <<< ???????? tile_map
             end
         end
     end
 
 endmodule
-

@@ -38,6 +38,9 @@ module game_engine #(
     output wire       bullet_active,
     output wire [9:0] bullet_x,
     output wire [9:0] bullet_y,
+    output wire       enemy_bullet_active,
+    output wire [9:0] enemy_bullet_x,
+    output wire [9:0] enemy_bullet_y,
     output wire [4:0] enemies_alive,
     output wire [9:0] enemy_group_x,
     output wire [9:0] enemy_group_y,
@@ -45,11 +48,13 @@ module game_engine #(
 );
 
     // MENU controller
+    wire player_hit;
     menu_fsm u_menu(
         .clk(clk),
         .rst_ni(rst_ni),
         .tick(tick),
         .btn_fire(btn_fire),
+        .player_hit(player_hit),
         .game_playing(game_playing)
     );
 
@@ -74,6 +79,8 @@ module game_engine #(
     );
 
     // Enemy Control
+    wire enemy_fire;
+    wire [9:0] enemy_fire_x, enemy_fire_y;
     enemy_control #(
         .MOVE_DELAY(ENEMY_MOVE_DELAY),
         .STEP_X(ENEMY_STEP_X),
@@ -84,6 +91,9 @@ module game_engine #(
         .bullet_x(b_x_raw),
         .bullet_y(b_y_raw),
         .bullet_hit_ack(bullet_hit_ack),
+        .enemy_fire(enemy_fire),
+        .enemy_fire_x(enemy_fire_x),
+        .enemy_fire_y(enemy_fire_y),
         .enemies_alive(enemies_alive),
         .group_x(enemy_group_x),
         .group_y(enemy_group_y)
@@ -101,5 +111,41 @@ module game_engine #(
     assign bullet_active = b_act_raw && !bullet_hit_ack;
     assign bullet_x = b_x_raw;
     assign bullet_y = b_y_raw;
+
+    // ==== Enemy bullet + hit detection (simple Galaga-style) ====
+    // Enemy bullet instance (single bullet at a time)
+    wire e_act_raw;
+    wire [9:0] e_x_raw, e_y_raw;
+    // Player hit when enemy bullet overlaps player box (16x16)
+    wire player_box_hit = e_act_raw &&
+                          (e_x_raw + 2 >= player_x) &&
+                          (e_x_raw < player_x + 16) &&
+                          (e_y_raw + 6 >= player_y) &&
+                          (e_y_raw < player_y + 16);
+
+    // Use player_hit to drop back to MENU.
+    assign player_hit = player_box_hit;
+
+    enemy_bullet #(
+        .BULLET_W(2),
+        .BULLET_H(6),
+        .SPEED_Y(6),
+        .SCREEN_H(480)
+    ) enemy_bullet_i (
+        .clk(clk),
+        .rst_ni(rst_game_ni),
+        .tick(tick),
+        .enemy_fire(enemy_fire),
+        .spawn_x(enemy_fire_x),
+        .spawn_y(enemy_fire_y),
+        .hit(player_box_hit),
+        .active(e_act_raw),
+        .bullet_x(e_x_raw),
+        .bullet_y(e_y_raw)
+    );
+
+    assign enemy_bullet_active = e_act_raw;
+    assign enemy_bullet_x = e_x_raw;
+    assign enemy_bullet_y = e_y_raw;
 
 endmodule

@@ -26,6 +26,7 @@ module top_module(
     input BTNC,
     input BTNU,
     input sw0, input sw1, input sw2, 
+    input RsRx,
     output HS,
     output VS,
     output [3:0] RED,
@@ -44,6 +45,7 @@ module top_module(
 
     wire [9:0] x, y;
     wire blank;
+    
 
     // Game Signals (Wiring between Engine and Renderer)
     wire [9:0] p_x, p_y;
@@ -54,6 +56,55 @@ module top_module(
     wire [4:0] en_alive;
     wire [9:0] en_grp_x, en_grp_y;
     wire       game_playing;
+    
+    wire [7:0] uart_data;
+    wire       uart_valid;
+    
+    uart_rx uart_inst (
+            .clk(CLK100MHZ),
+            .rst_ni(rst_ni),
+            .rx(RsRx),
+            .data(uart_data),
+            .valid(uart_valid)
+    );
+    
+    reg uart_left, uart_right, uart_fire;
+    reg [20:0] uart_timeout; // ??????????????????????????? (???? 20ms)
+    
+    reg [7:0] last_key_data;
+    localparam [23:0] GAP_TIMEOUT = 24'd60_000_000; // 0.6 ?????? (?????? Windows ??????)
+    localparam [23:0] RUN_TIMEOUT = 24'd4_000_000;
+    
+    always @(posedge CLK100MHZ) begin
+            if (!rst_ni) begin
+                uart_left <= 0; uart_right <= 0; uart_fire <= 0;
+                uart_timeout <= 0;
+                last_key_data <= 0;
+            end else begin
+                // ?????????????????????
+                if (uart_valid) begin
+                    if ((uart_data == last_key_data) && (uart_timeout > 0)) begin
+                        uart_timeout <= RUN_TIMEOUT; 
+                    end else begin
+                        uart_timeout <= GAP_TIMEOUT;
+                    end
+                    last_key_data <= uart_data;
+                    case (uart_data)
+                        8'h61: begin uart_left <= 1; uart_right <= 0; end // 'a'
+                        8'h64: begin uart_right <= 1; uart_left <= 0; end // 'd'
+                        8'h77: uart_fire <= 1; // 'w'
+                        8'h20: uart_fire <= 1; // Spacebar
+                        default: begin uart_left<=0; uart_right<=0; uart_fire<=0; end
+                    endcase
+                end 
+                // ?????????? ?????????????????????? (?????????????????????????)
+                else if (uart_timeout > 0) begin
+                    uart_timeout <= uart_timeout - 1;
+                end else begin
+                    uart_left <= 0; uart_right <= 0; uart_fire <= 0;
+                end
+            end
+        end
 
     // 1. Clock & Sync
     // ??????? parameter: game_tick.v ??? CLK_HZ, TICK_HZ -> ???????????????
@@ -71,6 +122,25 @@ module top_module(
         .HS(HS), .VS(VS), 
         .x(x), .y(y), .blank(blank)
     );
+    
+    ps2_rx ps2_inst (
+            .clk(CLK100MHZ), 
+            .rst_ni(rst_ni),
+            .ps2_clk(PS2_CLK), 
+            .ps2_data(PS2_DATA),
+            .rx_data(key_data), 
+            .rx_done_tick(key_done)
+    );
+        
+    keyboard_decoder key_decode (
+                .clk(CLK100MHZ), 
+                .rst_ni(rst_ni),
+                .rx_data(key_data), 
+                .rx_done_tick(key_done),
+                .btn_left(k_left), 
+                .btn_right(k_right), 
+                .btn_fire(k_fire)
+     );
 
     // 2. Game Engine (Logic Center)
     game_engine #(
@@ -81,9 +151,9 @@ module top_module(
         .clk(CLK100MHZ), 
         .rst_ni(rst_ni), 
         .tick(tick),
-        .btn_left(BTNL), 
-        .btn_right(BTNR), 
-        .btn_fire(BTNU),
+        .btn_left(BTNL | uart_left),    // <-- ??? OR ????????? UART
+        .btn_right(BTNR | uart_right),  // <-- ??? OR ????????? UART
+        .btn_fire(BTNU | uart_fire),
         .game_playing(game_playing),
         // Outputs
         .player_x(p_x), 

@@ -23,7 +23,7 @@
 module player_control #(
     parameter START_X = 320,
     parameter START_Y = 440,
-    parameter SPEED   = 4,      // ?????? top_module source: 59-60
+    parameter SPEED   = 8,      // ?????? top_module source: 59-60
     parameter PLAYER_W = 16,
     parameter SCREEN_W = 640
 )(

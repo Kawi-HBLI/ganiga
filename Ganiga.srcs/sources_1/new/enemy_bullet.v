@@ -21,9 +21,9 @@
 
 
 module enemy_bullet #(
-    parameter BULLET_W = 2,
+    parameter BULLET_W = 4,
     parameter BULLET_H = 6,
-    parameter SPEED_Y  = 6,
+    parameter SPEED_Y  = 20,
     parameter SCREEN_H = 480
 )(
     input  wire       clk,

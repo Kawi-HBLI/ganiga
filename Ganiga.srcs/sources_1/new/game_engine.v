@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/20/2025 11:13:45 PM
-// Design Name: 
-// Module Name: game_engine
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module game_engine #(
     parameter ENEMY_MOVE_DELAY = 30,
@@ -44,7 +25,9 @@ module game_engine #(
     output wire [4:0] enemies_alive,
     output wire [9:0] enemy_group_x,
     output wire [9:0] enemy_group_y,
-    output wire       game_playing
+    output wire [1:0] game_state,
+    output wire       game_playing,
+    output wire       game_over
 );
 
     // MENU controller
@@ -52,13 +35,14 @@ module game_engine #(
     menu_fsm u_menu(
         .clk(clk),
         .rst_ni(rst_ni),
-        .tick(tick),
         .btn_fire(btn_fire),
         .player_hit(player_hit),
-        .game_playing(game_playing)
+        .game_state(game_state),
+        .game_playing(game_playing),
+        .game_over(game_over)
     );
 
-    // Gate submodules so they reset/hold during MENU
+    // Gate submodules so they reset/hold during MENU + GAMEOVER
     wire rst_game_ni = rst_ni & game_playing;
     wire fire_game   = btn_fire & game_playing;
 
@@ -113,17 +97,16 @@ module game_engine #(
     assign bullet_y = b_y_raw;
 
     // ==== Enemy bullet + hit detection (simple Galaga-style) ====
-    // Enemy bullet instance (single bullet at a time)
     wire e_act_raw;
     wire [9:0] e_x_raw, e_y_raw;
-    // Player hit when enemy bullet overlaps player box (16x16)
+
     wire player_box_hit = e_act_raw &&
                           (e_x_raw + 2 >= player_x) &&
                           (e_x_raw < player_x + 16) &&
                           (e_y_raw + 6 >= player_y) &&
                           (e_y_raw < player_y + 16);
 
-    // Use player_hit to drop back to MENU.
+    // player_hit is a pulse-ish signal -> menu_fsm latches it now (safe)
     assign player_hit = player_box_hit;
 
     enemy_bullet #(

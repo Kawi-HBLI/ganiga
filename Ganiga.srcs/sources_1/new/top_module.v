@@ -1,23 +1,5 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/20/2025 11:12:49 PM
-// Design Name: 
-// Module Name: top_module
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 module top_module(
     input CLK100MHZ,
@@ -25,29 +7,26 @@ module top_module(
     input BTNR,
     input BTNC,
     input BTNU,
-//    input sw0, input sw1, input sw2, 
-    input RsRx,
     output HS,
     output VS,
     output [3:0] RED,
     output [3:0] GREEN,
     output [3:0] BLUE
-    );
+);
 
     // System Signals
     wire rst_ni = ~BTNC;
     wire tick;
 
     // Easy enemy speed tuning
-    localparam integer ENEMY_MOVE_DELAY = 30; // bigger = slower
-    localparam integer ENEMY_STEP_X     = 1;  // pixels per move
-    localparam integer ENEMY_STEP_Y     = 10; // drop when hitting edge
+    localparam integer ENEMY_MOVE_DELAY = 30;
+    localparam integer ENEMY_STEP_X     = 1;
+    localparam integer ENEMY_STEP_Y     = 10;
 
     wire [9:0] x, y;
     wire blank;
-    
 
-    // Game Signals (Wiring between Engine and Renderer)
+    // Game Signals
     wire [9:0] p_x, p_y;
     wire       b_active;
     wire [9:0] b_x, b_y;
@@ -56,58 +35,10 @@ module top_module(
     wire [4:0] en_alive;
     wire [9:0] en_grp_x, en_grp_y;
     wire       game_playing;
-    
-    wire [7:0] uart_data;
-    wire       uart_valid;
-    
-    uart_rx uart_inst (
-            .clk(CLK100MHZ),
-            .rst_ni(rst_ni),
-            .rx(RsRx),
-            .data(uart_data),
-            .valid(uart_valid)
-    );
-    
-    reg uart_left, uart_right, uart_fire;
-    reg [20:0] uart_timeout; // ??????????????????????????? (???? 20ms)
-    
-    reg [7:0] last_key_data;
-    localparam [23:0] GAP_TIMEOUT = 24'd60_000_000; // 0.6 ?????? (?????? Windows ??????)
-    localparam [23:0] RUN_TIMEOUT = 24'd4_000_000;
-    
-    always @(posedge CLK100MHZ) begin
-            if (!rst_ni) begin
-                uart_left <= 0; uart_right <= 0; uart_fire <= 0;
-                uart_timeout <= 0;
-                last_key_data <= 0;
-            end else begin
-                // ?????????????????????
-                if (uart_valid) begin
-                    if ((uart_data == last_key_data) && (uart_timeout > 0)) begin
-                        uart_timeout <= RUN_TIMEOUT; 
-                    end else begin
-                        uart_timeout <= GAP_TIMEOUT;
-                    end
-                    last_key_data <= uart_data;
-                    case (uart_data)
-                        8'h61: begin uart_left <= 1; uart_right <= 0; end // 'a'
-                        8'h64: begin uart_right <= 1; uart_left <= 0; end // 'd'
-                        8'h77: uart_fire <= 1; // 'w'
-                        8'h20: uart_fire <= 1; // Spacebar
-                        default: begin uart_left<=0; uart_right<=0; uart_fire<=0; end
-                    endcase
-                end 
-                // ?????????? ?????????????????????? (?????????????????????????)
-                else if (uart_timeout > 0) begin
-                    uart_timeout <= uart_timeout - 1;
-                end else begin
-                    uart_left <= 0; uart_right <= 0; uart_fire <= 0;
-                end
-            end
-        end
+    wire       game_over;
+    wire [1:0] game_state;
 
     // 1. Clock & Sync
-    // ??????? parameter: game_tick.v ??? CLK_HZ, TICK_HZ -> ???????????????
     game_tick #(
         .CLK_HZ (100_000_000),
         .TICK_HZ(60)
@@ -118,76 +49,58 @@ module top_module(
     );
 
     vga_sync vga_driver (
-        .clk(CLK100MHZ), 
-        .HS(HS), .VS(VS), 
+        .clk(CLK100MHZ),
+        .HS(HS), .VS(VS),
         .x(x), .y(y), .blank(blank)
     );
-    
-    ps2_rx ps2_inst (
-            .clk(CLK100MHZ), 
-            .rst_ni(rst_ni),
-            .ps2_clk(PS2_CLK), 
-            .ps2_data(PS2_DATA),
-            .rx_data(key_data), 
-            .rx_done_tick(key_done)
-    );
-        
-    keyboard_decoder key_decode (
-                .clk(CLK100MHZ), 
-                .rst_ni(rst_ni),
-                .rx_data(key_data), 
-                .rx_done_tick(key_done),
-                .btn_left(k_left), 
-                .btn_right(k_right), 
-                .btn_fire(k_fire)
-     );
 
-    // 2. Game Engine (Logic Center)
+    // 2. Game Engine
     game_engine #(
         .ENEMY_MOVE_DELAY(ENEMY_MOVE_DELAY),
         .ENEMY_STEP_X(ENEMY_STEP_X),
         .ENEMY_STEP_Y(ENEMY_STEP_Y)
     ) engine (
-        .clk(CLK100MHZ), 
-        .rst_ni(rst_ni), 
+        .clk(CLK100MHZ),
+        .rst_ni(rst_ni),
         .tick(tick),
-        .btn_left(BTNL | uart_left),    // <-- ??? OR ????????? UART
-        .btn_right(BTNR | uart_right),  // <-- ??? OR ????????? UART
-        .btn_fire(BTNU | uart_fire),
+        .btn_left(BTNL),
+        .btn_right(BTNR),
+        .btn_fire(BTNU),
+        .game_state(game_state),
         .game_playing(game_playing),
-        // Outputs
-        .player_x(p_x), 
+        .game_over(game_over),
+        .player_x(p_x),
         .player_y(p_y),
-        .bullet_active(b_active), 
-        .bullet_x(b_x), 
+        .bullet_active(b_active),
+        .bullet_x(b_x),
         .bullet_y(b_y),
         .enemy_bullet_active(eb_active),
         .enemy_bullet_x(eb_x),
         .enemy_bullet_y(eb_y),
-        .enemies_alive(en_alive), 
-        .enemy_group_x(en_grp_x), 
+        .enemies_alive(en_alive),
+        .enemy_group_x(en_grp_x),
         .enemy_group_y(en_grp_y)
     );
 
-    // 3. Renderer (Visual Center)
+    // 3. Renderer
     renderer ren (
-        .clk(CLK100MHZ), 
-        .blank(blank), 
+        .clk(CLK100MHZ),
+        .blank(blank),
         .x(x), .y(y),
+        .game_state(game_state),
         .game_playing(game_playing),
-        // Data to draw
-        .player_x(p_x), 
+        .game_over(game_over),
+        .player_x(p_x),
         .player_y(p_y),
-        .bullet_active(b_active), 
-        .bullet_x(b_x), 
+        .bullet_active(b_active),
+        .bullet_x(b_x),
         .bullet_y(b_y),
         .enemy_bullet_active(eb_active),
         .enemy_bullet_x(eb_x),
         .enemy_bullet_y(eb_y),
-        .enemies_alive(en_alive), 
-        .enemy_group_x(en_grp_x), 
+        .enemies_alive(en_alive),
+        .enemy_group_x(en_grp_x),
         .enemy_group_y(en_grp_y),
-        // Color output
         .r(RED), .g(GREEN), .b(BLUE)
     );
 

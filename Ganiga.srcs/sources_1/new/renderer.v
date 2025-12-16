@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
 
 module renderer(
     input  wire       clk,
@@ -9,6 +8,7 @@ module renderer(
     input  wire [1:0] game_state,
     input  wire       game_playing,
     input  wire       game_over,
+    input  wire       game_won, 
     input  wire [9:0] player_x,
     input  wire [9:0] player_y,
     input  wire       bullet_active,
@@ -17,7 +17,7 @@ module renderer(
     input  wire       enemy_bullet_active,
     input  wire [9:0] enemy_bullet_x,
     input  wire [9:0] enemy_bullet_y,
-    input  wire [4:0] enemies_alive,
+    input  wire [7:0] enemies_alive, 
     input  wire [9:0] enemy_group_x,
     input  wire [9:0] enemy_group_y,
     output reg  [3:0] r,
@@ -25,28 +25,20 @@ module renderer(
     output reg  [3:0] b
 );
 
-    // Player
     wire px_player;
     wire [3:0] p_r, p_g, p_b;
     wire [3:0] map_r, map_g, map_b;
     wire       map_is_wall;
 
     tile_map map_inst (
-        .x(x),
-        .y(y),
-        .r(map_r),
-        .g(map_g),
-        .b(map_b),
-        .is_wall(map_is_wall)
+        .x(x), .y(y), .r(map_r), .g(map_g), .b(map_b), .is_wall(map_is_wall)
     );
-
     player_sprite spr_player(
         .clk(clk), .x(x), .y(y),
         .player_x(player_x), .player_y(player_y),
         .px_on(px_player), .r(p_r), .g(p_g), .b(p_b)
     );
 
-    // Enemy
     wire px_enemy;
     wire [3:0] e_r, e_g, e_b;
     enemy_sprite spr_enemy(
@@ -56,23 +48,19 @@ module renderer(
         .px_on(px_enemy), .r(e_r), .g(e_g), .b(e_b)
     );
 
-    // ===== MENU / GAMEOVER (font overlay) =====
     reg [15:0] frame_cnt;
     always @(posedge clk) begin
         if (!blank && x==0 && y==0) frame_cnt <= frame_cnt + 1'b1;
     end
     wire blink_on = frame_cnt[5];
-
     wire star_on = (~blank) && ((x[3]^y[4]) & (x[7]^y[6]) & ~x[1]);
 
-    // ===== MENU text =====
     localparam integer MENU_SCALE = 4;
     localparam integer MENU_LEN   = 6;
     localparam integer MENU_W     = MENU_LEN * 8 * MENU_SCALE;
     localparam integer MENU_H     = 8 * MENU_SCALE;
     localparam integer MENU_X0    = (640 - MENU_W)/2;
     localparam integer MENU_Y0    = 120;
-
     localparam integer PROMPT_SCALE = 2;
     localparam integer PROMPT_LEN   = 15;
     localparam integer PROMPT_W     = PROMPT_LEN * 8 * PROMPT_SCALE;
@@ -124,7 +112,6 @@ module renderer(
     wire [2:0] menu_col = (menu_dx / MENU_SCALE) % 8;
     wire [2:0] menu_row = (menu_dy / MENU_SCALE) % 8;
     wire [7:0] menu_ch  = menu_char(menu_ci);
-
     wire in_prompt_box = (~blank) && (x>=PROMPT_X0) && (x<PROMPT_X0+PROMPT_W) && (y>=PROMPT_Y0) && (y<PROMPT_Y0+PROMPT_H);
     wire [9:0] pr_dx = x - PROMPT_X0;
     wire [9:0] pr_dy = y - PROMPT_Y0;
@@ -133,7 +120,6 @@ module renderer(
     wire [2:0] pr_row = (pr_dy / PROMPT_SCALE) % 8;
     wire [7:0] pr_ch  = prompt_char(pr_ci);
 
-    // 3 ROM reads to build outline
     wire [2:0] menu_row_up = (menu_row==0) ? 3'd0 : (menu_row-3'd1);
     wire [2:0] menu_row_dn = (menu_row==7) ? 3'd7 : (menu_row+3'd1);
     wire [7:0] menu_bits0, menu_bits_up, menu_bits_dn;
@@ -147,21 +133,17 @@ module renderer(
     wire menu_fill_on = in_menu_box && menu_bits0[7 - menu_col];
     wire [2:0] menu_col_l = (menu_col==0) ? 3'd0 : (menu_col-3'd1);
     wire [2:0] menu_col_r = (menu_col==7) ? 3'd7 : (menu_col+3'd1);
-
-    wire menu_neigh_on =
-        menu_bits0[7 - menu_col_l] | menu_bits0[7 - menu_col_r] |
-        menu_bits_up[7 - menu_col] | menu_bits_dn[7 - menu_col] |
-        menu_bits_up[7 - menu_col_l] | menu_bits_up[7 - menu_col_r] |
-        menu_bits_dn[7 - menu_col_l] | menu_bits_dn[7 - menu_col_r];
+    wire menu_neigh_on = menu_bits0[7 - menu_col_l] | menu_bits0[7 - menu_col_r] |
+                         menu_bits_up[7 - menu_col] | menu_bits_dn[7 - menu_col] |
+                         menu_bits_up[7 - menu_col_l] | menu_bits_up[7 - menu_col_r] |
+                         menu_bits_dn[7 - menu_col_l] | menu_bits_dn[7 - menu_col_r];
 
     wire menu_outline_on = in_menu_box && menu_neigh_on && !menu_bits0[7 - menu_col];
-
     wire prompt_on = in_prompt_box && pr_bits[7 - pr_col] && blink_on;
 
     reg [3:0] menu_fill_r, menu_fill_g, menu_fill_b;
     always @(*) begin
-        menu_fill_r = 4'hF;
-        menu_fill_b = 4'h0;
+        menu_fill_r = 4'hF; menu_fill_b = 4'h0;
         case (menu_dy[9:3])
             0: menu_fill_g = 4'hF;
             1: menu_fill_g = 4'hD;
@@ -170,16 +152,14 @@ module renderer(
         endcase
     end
 
-    // ===== GAME OVER text =====
     localparam integer OVER_SCALE = 4;
-    localparam integer OVER_LEN   = 9;   // "GAME OVER"
+    localparam integer OVER_LEN   = 9;
     localparam integer OVER_W     = OVER_LEN * 8 * OVER_SCALE;
     localparam integer OVER_H     = 8 * OVER_SCALE;
     localparam integer OVER_X0    = (640 - OVER_W)/2;
     localparam integer OVER_Y0    = 140;
-
     localparam integer OVERP_SCALE = 2;
-    localparam integer OVERP_LEN   = 15; // "<FIRE> TO RETRY"
+    localparam integer OVERP_LEN   = 15; 
     localparam integer OVERP_W     = OVERP_LEN * 8 * OVERP_SCALE;
     localparam integer OVERP_H     = 8 * OVERP_SCALE;
     localparam integer OVERP_X0    = (640 - OVERP_W)/2;
@@ -232,7 +212,6 @@ module renderer(
     wire [2:0] over_col = (over_dx / OVER_SCALE) % 8;
     wire [2:0] over_row = (over_dy / OVER_SCALE) % 8;
     wire [7:0] over_ch  = over_char(over_ci);
-
     wire in_overp_box = (~blank) && (x>=OVERP_X0) && (x<OVERP_X0+OVERP_W) && (y>=OVERP_Y0) && (y<OVERP_Y0+OVERP_H);
     wire [9:0] ovp_dx = x - OVERP_X0;
     wire [9:0] ovp_dy = y - OVERP_Y0;
@@ -254,21 +233,17 @@ module renderer(
     wire over_fill_on = in_over_box && over_bits0[7 - over_col];
     wire [2:0] over_col_l = (over_col==0) ? 3'd0 : (over_col-3'd1);
     wire [2:0] over_col_r = (over_col==7) ? 3'd7 : (over_col+3'd1);
-
-    wire over_neigh_on =
-        over_bits0[7 - over_col_l] | over_bits0[7 - over_col_r] |
-        over_bits_up[7 - over_col] | over_bits_dn[7 - over_col] |
-        over_bits_up[7 - over_col_l] | over_bits_up[7 - over_col_r] |
-        over_bits_dn[7 - over_col_l] | over_bits_dn[7 - over_col_r];
+    wire over_neigh_on = over_bits0[7 - over_col_l] | over_bits0[7 - over_col_r] |
+                         over_bits_up[7 - over_col] | over_bits_dn[7 - over_col] |
+                         over_bits_up[7 - over_col_l] | over_bits_up[7 - over_col_r] |
+                         over_bits_dn[7 - over_col_l] | over_bits_dn[7 - over_col_r];
 
     wire over_outline_on = in_over_box && over_neigh_on && !over_bits0[7 - over_col];
-
     wire over_prompt_on = in_overp_box && ovp_bits[7 - ovp_col] && blink_on;
 
     reg [3:0] over_fill_r, over_fill_g, over_fill_b;
     always @(*) begin
-        over_fill_g = 4'h0;
-        over_fill_b = 4'h0;
+        over_fill_g = 4'h0; over_fill_b = 4'h0;
         case (over_dy[9:3])
             0: begin over_fill_r = 4'hF; over_fill_g = 4'h2; end
             1: begin over_fill_r = 4'hF; over_fill_g = 4'h6; end
@@ -276,26 +251,38 @@ module renderer(
             default: begin over_fill_r = 4'hF; over_fill_g = 4'hD; end
         endcase
     end
+    
+    localparam integer WIN_LEN = 2;
+    localparam integer WIN_W   = WIN_LEN * 8 * OVER_SCALE;
+    localparam integer WIN_X0  = (640 - WIN_W)/2;
+    wire in_win_box = (~blank) && (x>=WIN_X0) && (x<WIN_X0+WIN_W) && (y>=OVER_Y0) && (y<OVER_Y0+OVER_H);
+    wire [9:0] win_dx = x - WIN_X0;
+    wire [9:0] win_dy = y - OVER_Y0; 
+    wire [3:0] win_ci = win_dx / (8*OVER_SCALE);
+    wire [2:0] win_col = (win_dx / OVER_SCALE) % 8;
+    wire [2:0] win_row = (win_dy / OVER_SCALE) % 8;
+    // Reuse G from Font
+    wire [7:0] win_bits;
+    font8x8_rom u_font_win(.ch("G"), .row(win_row), .bits(win_bits));
+    wire win_fill_on = in_win_box && win_bits[7 - win_col];
 
-    // Bullet
     localparam BULLET_W = 2;
     localparam BULLET_H = 6;
-    wire px_bullet = bullet_active &&
-                     (x >= bullet_x) && (x < bullet_x + BULLET_W) &&
-                     (y >= bullet_y) && (y < bullet_y + BULLET_H);
-
-    // Enemy Bullet
-    wire px_enemy_bullet = enemy_bullet_active &&
-                           (x >= enemy_bullet_x) && (x < enemy_bullet_x + BULLET_W) &&
-                           (y >= enemy_bullet_y) && (y < enemy_bullet_y + BULLET_H);
+    wire px_bullet = bullet_active && (x >= bullet_x) && (x < bullet_x + BULLET_W) && (y >= bullet_y) && (y < bullet_y + BULLET_H);
+    wire px_enemy_bullet = enemy_bullet_active && (x >= enemy_bullet_x) && (x < enemy_bullet_x + BULLET_W) && (y >= enemy_bullet_y) && (y < enemy_bullet_y + BULLET_H);
 
     always @(*) begin
         r = 0; g = 0; b = 0;
-
         if (blank) begin
             r = 0; g = 0; b = 0;
-
-        // ===== GAME OVER SCREEN =====
+        end else if (game_won) begin
+             if (win_fill_on) begin
+                r = 4'h2; g = 4'hF; b = 4'h2; // Green Text for Win
+             end else if (over_prompt_on) begin
+                r = 4'hF; g = 4'hF; b = 4'hF;
+             end else if (star_on) begin
+                r = 4'h2; g = 4'h2; b = 4'h2;
+             end
         end else if (game_over) begin
             if (over_outline_on) begin
                 r = 4'h1; g = 4'h1; b = 4'h1;
@@ -305,11 +292,7 @@ module renderer(
                 r = 4'hF; g = 4'hF; b = 4'hF;
             end else if (star_on) begin
                 r = 4'h2; g = 4'h2; b = 4'h2;
-            end else begin
-                r = 0; g = 0; b = 0;
             end
-
-        // ===== MENU SCREEN =====
         end else if (!game_playing) begin
             if (menu_outline_on) begin
                 r = 4'h1; g = 4'h1; b = 4'h1;
@@ -319,11 +302,7 @@ module renderer(
                 r = 4'hF; g = 4'hF; b = 4'hF;
             end else if (star_on) begin
                 r = 4'h2; g = 4'h2; b = 4'h2;
-            end else begin
-                r = 0; g = 0; b = 0;
             end
-
-        // ===== PLAY SCREEN =====
         end else if (px_player) begin
             r = p_r; g = p_g; b = p_b;
         end else if (px_bullet) begin

@@ -73,6 +73,18 @@ always @(*) begin
             6: bits=8'b00111100;
             default: bits=8'b00000000;
         endcase
+        
+        "Y": case(row)
+            0: bits = 8'b01100110; //  **  **
+            1: bits = 8'b01100110; //  **  **
+            2: bits = 8'b00111100; //   ****
+            3: bits = 8'b00011000; //    **
+            4: bits = 8'b00011000; //    **
+            5: bits = 8'b00011000; //    **
+            6: bits = 8'b00011000; //    **
+            default: bits = 8'b00000000;
+        endcase
+
         "M": case(row)
             0: bits=8'b01100011;
             1: bits=8'b01110111;
@@ -133,6 +145,17 @@ always @(*) begin
             6: bits=8'b00011000;
             default: bits=8'b00000000;
         endcase
+        "V": case(row)
+            0: bits = 8'b01100110; //  **  **
+            1: bits = 8'b01100110; //  **  **
+            2: bits = 8'b01100110; //  **  **
+            3: bits = 8'b01100110; //  **  **
+            4: bits = 8'b00111100; //   ****
+            5: bits = 8'b00011000; //    **
+            6: bits = 8'b00011000; //    **
+            default: bits = 8'b00000000;
+        endcase
+
         "U": case(row)
             0: bits=8'b01100110;
             1: bits=8'b01100110;

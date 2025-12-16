@@ -1,12 +1,10 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
 
 module game_engine #(
     parameter ENEMY_MOVE_DELAY = 30,
     parameter ENEMY_STEP_X     = 1,
     parameter ENEMY_STEP_Y     = 10
 ) (
-
     input wire clk,
     input wire rst_ni,
     input wire tick,
@@ -22,36 +20,36 @@ module game_engine #(
     output wire       enemy_bullet_active,
     output wire [9:0] enemy_bullet_x,
     output wire [9:0] enemy_bullet_y,
-    output wire [4:0] enemies_alive,
+    output wire [7:0] enemies_alive, 
     output wire [9:0] enemy_group_x,
     output wire [9:0] enemy_group_y,
     output wire [1:0] game_state,
     output wire       game_playing,
-    output wire       game_over
+    output wire       game_over,
+    output wire       game_won
 );
-
-    // MENU controller
     wire player_hit;
+    wire player_victory; 
+
     menu_fsm u_menu(
         .clk(clk),
         .rst_ni(rst_ni),
         .btn_fire(btn_fire),
         .player_hit(player_hit),
+        .player_won(player_victory), 
         .game_state(game_state),
         .game_playing(game_playing),
-        .game_over(game_over)
+        .game_over(game_over),
+        .game_won(game_won)
     );
 
-    // Gate submodules so they reset/hold during MENU + GAMEOVER
     wire rst_game_ni = rst_ni & game_playing;
     wire fire_game   = btn_fire & game_playing;
 
-    // Internal wires for interaction
     wire b_act_raw;
     wire [9:0] b_x_raw, b_y_raw;
     wire bullet_hit_ack;
 
-    // Player Control
     player_control #(
         .START_X(320),
         .START_Y(440),
@@ -62,9 +60,9 @@ module game_engine #(
         .x(player_x), .y(player_y)
     );
 
-    // Enemy Control
     wire enemy_fire;
     wire [9:0] enemy_fire_x, enemy_fire_y;
+
     enemy_control #(
         .MOVE_DELAY(ENEMY_MOVE_DELAY),
         .STEP_X(ENEMY_STEP_X),
@@ -80,10 +78,10 @@ module game_engine #(
         .enemy_fire_y(enemy_fire_y),
         .enemies_alive(enemies_alive),
         .group_x(enemy_group_x),
-        .group_y(enemy_group_y)
+        .group_y(enemy_group_y),
+        .victory(player_victory) 
     );
 
-    // Bullet
     bullet bullet_inst (
         .clk(clk), .rst_ni(rst_game_ni), .fire(fire_game), .tick(tick),
         .hit(bullet_hit_ack),
@@ -96,17 +94,14 @@ module game_engine #(
     assign bullet_x = b_x_raw;
     assign bullet_y = b_y_raw;
 
-    // ==== Enemy bullet + hit detection (simple Galaga-style) ====
     wire e_act_raw;
     wire [9:0] e_x_raw, e_y_raw;
-
     wire player_box_hit = e_act_raw &&
                           (e_x_raw + 2 >= player_x) &&
                           (e_x_raw < player_x + 16) &&
                           (e_y_raw + 6 >= player_y) &&
                           (e_y_raw < player_y + 16);
 
-    // player_hit is a pulse-ish signal -> menu_fsm latches it now (safe)
     assign player_hit = player_box_hit;
 
     enemy_bullet #(

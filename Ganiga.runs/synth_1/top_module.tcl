@@ -19,10 +19,11 @@ read_mem D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_1.mem
 read_verilog -library xil_defaultlib {
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_sprite_rom.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_sprite_rom.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_bullet.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_bullet_manager.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_control.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/menu_fsm.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_control.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_bullet.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/bullet.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/tile_map.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_sprite.v

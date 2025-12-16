@@ -8,7 +8,7 @@ module bullet #(
     input  wire       rst_ni,
     input  wire       fire,
     input  wire       tick,
-    input  wire       hit,         // [NEW] ?????????????????????
+    input  wire       hit,        
     input  wire [9:0] player_x,
     input  wire [9:0] player_y,
    
@@ -27,23 +27,22 @@ module bullet #(
         end else begin
             fire_prev <= fire;
 
-            // 1. Logic ?????? (??????????? active = 0)
+
             if (fire && !fire_prev && !active) begin
                 active   <= 1'b1;
                 bullet_x <= player_x + 8;
                 bullet_y <= player_y - 6;
             end
 
-            // 2. Logic ?????????????????????
             if (active) begin
                 if (hit) begin
-                     active <= 1'b0; // [NEW] ????? ?????????????????
+                     active <= 1'b0;
                 end
                 else if (tick) begin
                     if (bullet_y > 10)
                         bullet_y <= bullet_y - 10;
                     else
-                        active <= 1'b0; // ????????
+                        active <= 1'b0;
                 end
             end
         end

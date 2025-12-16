@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-| Date             : Tue Dec 16 16:35:22 2025
+| Date             : Tue Dec 16 17:13:02 2025
 | Host             : Kawiii running 64-bit major release  (build 9200)
 | Command          : 
 | Design           : top_module
@@ -30,12 +30,12 @@ Table of Contents
 ----------
 
 +--------------------------+--------+
-| Total On-Chip Power (W)  | 17.691 |
-| Dynamic (W)              | 17.442 |
-| Device Static (W)        | 0.249  |
+| Total On-Chip Power (W)  | 17.781 |
+| Dynamic (W)              | 17.530 |
+| Device Static (W)        | 0.251  |
 | Effective TJA (C/W)      | 5.0    |
-| Max Ambient (C)          | 11.6   |
-| Junction Temperature (C) | 113.4  |
+| Max Ambient (C)          | 11.1   |
+| Junction Temperature (C) | 113.9  |
 | Confidence Level         | Low    |
 | Setting File             | ---    |
 | Simulation Activity File | ---    |
@@ -49,18 +49,18 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     6.702 |     2504 |       --- |             --- |
-|   LUT as Logic |     6.359 |     1505 |     20800 |            7.24 |
-|   CARRY4       |     0.287 |      217 |      8150 |            2.66 |
-|   Register     |     0.035 |      258 |     41600 |            0.62 |
-|   F7/F8 Muxes  |     0.016 |       34 |     32600 |            0.10 |
+| Slice Logic    |     6.171 |     2366 |       --- |             --- |
+|   LUT as Logic |     5.810 |     1396 |     20800 |            6.71 |
+|   CARRY4       |     0.304 |      217 |      8150 |            2.66 |
+|   Register     |     0.041 |      258 |     41600 |            0.62 |
+|   F7/F8 Muxes  |     0.011 |       10 |     32600 |            0.03 |
 |   BUFG         |     0.005 |        1 |        32 |            3.13 |
-|   Others       |     0.000 |       26 |       --- |             --- |
-| Signals        |     5.259 |     1422 |       --- |             --- |
+|   Others       |     0.000 |       28 |       --- |             --- |
+| Signals        |     5.016 |     1328 |       --- |             --- |
 | Block RAM      |     0.031 |        1 |        50 |            2.00 |
-| I/O            |     5.451 |       19 |       106 |           17.92 |
-| Static Power   |     0.249 |          |           |                 |
-| Total          |    17.691 |          |           |                 |
+| I/O            |     6.312 |       19 |       106 |           17.92 |
+| Static Power   |     0.251 |          |           |                 |
+| Total          |    17.781 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -70,16 +70,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       0.950 |    12.787 |      12.636 |      0.150 |
-| Vccaux    |       1.800 |     0.236 |       0.199 |      0.037 |
-| Vcco33    |       3.300 |     1.539 |       1.538 |      0.001 |
+| Vccint    |       0.950 |    11.974 |      11.822 |      0.152 |
+| Vccaux    |       1.800 |     0.268 |       0.231 |      0.037 |
+| Vcco33    |       3.300 |     1.783 |       1.782 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       0.950 |     0.007 |       0.002 |      0.004 |
+| Vccbram   |       0.950 |     0.007 |       0.002 |      0.005 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccadc    |       1.800 |     0.018 |       0.000 |      0.018 |
@@ -137,23 +137,23 @@ Table of Contents
 +------------------+-----------+
 | Name             | Power (W) |
 +------------------+-----------+
-| top_module       |    17.442 |
-|   engine         |     2.591 |
-|     bullet_inst  |     0.338 |
-|     e_ctrl       |     1.587 |
-|     eb_manager   |     0.370 |
-|       bullet1    |     0.123 |
-|       bullet2    |     0.128 |
-|       bullet3    |     0.118 |
-|     p_ctrl       |     0.208 |
-|     u_menu       |     0.087 |
-|   game_tick_i    |     0.263 |
-|   ren            |     0.404 |
-|     spr_enemy    |     0.376 |
-|       enemy_rom  |     0.249 |
-|     spr_player   |     0.023 |
-|       player_rom |     0.010 |
-|   vga_driver     |     8.656 |
+| top_module       |    17.530 |
+|   engine         |     2.959 |
+|     bullet_inst  |     0.379 |
+|     e_ctrl       |     1.741 |
+|     eb_manager   |     0.511 |
+|       bullet1    |     0.178 |
+|       bullet2    |     0.168 |
+|       bullet3    |     0.165 |
+|     p_ctrl       |     0.253 |
+|     u_menu       |     0.074 |
+|   game_tick_i    |     0.260 |
+|   ren            |     0.443 |
+|     spr_enemy    |     0.393 |
+|       enemy_rom  |     0.274 |
+|     spr_player   |     0.044 |
+|       player_rom |     0.038 |
+|   vga_driver     |     7.087 |
 +------------------+-----------+
 
 

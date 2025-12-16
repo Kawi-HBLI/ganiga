@@ -1,23 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/23/2025 02:04:36 PM
-// Design Name: 
-// Module Name: game_tick
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 
 module game_tick #(
@@ -25,8 +6,8 @@ module game_tick #(
     parameter integer TICK_HZ = 60
     )(
     input  wire clk_i,
-    input  wire rst_ni,   // active low
-    output reg  tick_o    // pulse = 1 ??? 1 clock ??? ? 1/TICK_HZ ??????
+    input  wire rst_ni,   
+    output reg  tick_o    
     );
 
     localparam integer COUNT_MAX = CLK_HZ / TICK_HZ - 1;

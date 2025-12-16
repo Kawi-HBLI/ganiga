@@ -1,29 +1,10 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 12/13/2025 11:47:17 AM
-// Design Name: 
-// Module Name: player_control
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 
 module player_control #(
     parameter START_X = 320,
     parameter START_Y = 440,
-    parameter SPEED   = 8,      // ?????? top_module source: 59-60
+    parameter SPEED   = 8,      
     parameter PLAYER_W = 16,
     parameter SCREEN_W = 640
 )(
@@ -42,7 +23,6 @@ module player_control #(
         if (!rst_ni) begin
             x <= START_X;
         end else if (tick) begin
-            // Logic ????????????? ??????????????
             if (btn_left && x > SPEED) 
                 x <= x - SPEED;
             else if (btn_right && x < (SCREEN_W - PLAYER_W - SPEED)) 

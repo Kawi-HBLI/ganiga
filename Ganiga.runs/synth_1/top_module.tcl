@@ -20,6 +20,10 @@ read_verilog -library xil_defaultlib {
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_sprite_rom.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_sprite_rom.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_bullet.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/font8x8_rom.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/screen_win.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/screen_menu.v
+  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/screen_game_over.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_bullet_manager.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_control.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/menu_fsm.v
@@ -27,7 +31,6 @@ read_verilog -library xil_defaultlib {
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/bullet.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/tile_map.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_sprite.v
-  D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/font8x8_rom.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_sprite.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/vga_sync.v
   D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_tick.v

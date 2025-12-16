@@ -2,8 +2,8 @@
 # Vivado v2015.4 (64-bit)
 # SW Build 1412921 on Wed Nov 18 09:43:45 MST 2015
 # IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
-# Start of session at: Tue Dec 16 16:34:19 2025
-# Process ID: 37840
+# Start of session at: Tue Dec 16 17:12:06 2025
+# Process ID: 37076
 # Current directory: D:/Y2_ALL/CPE_digital/GAniga/Ganiga.runs/synth_1
 # Command line: vivado.exe -log top_module.vds -mode batch -messageDb vivado.pb -notrace -source top_module.tcl
 # Log file: D:/Y2_ALL/CPE_digital/GAniga/Ganiga.runs/synth_1/top_module.vds
@@ -15,17 +15,17 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35ti'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35ti'
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 260.953 ; gain = 89.301
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 260.816 ; gain = 89.141
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'top_module' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/top_module.v:3]
 	Parameter ENEMY_MOVE_DELAY bound to: 5 - type: integer 
 	Parameter ENEMY_STEP_X bound to: 2 - type: integer 
 	Parameter ENEMY_STEP_Y bound to: 10 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'game_tick' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_tick.v:23]
+INFO: [Synth 8-638] synthesizing module 'game_tick' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_tick.v:4]
 	Parameter CLK_HZ bound to: 100000000 - type: integer 
 	Parameter TICK_HZ bound to: 60 - type: integer 
 	Parameter COUNT_MAX bound to: 1666665 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'game_tick' (1#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_tick.v:23]
+INFO: [Synth 8-256] done synthesizing module 'game_tick' (1#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_tick.v:4]
 INFO: [Synth 8-638] synthesizing module 'vga_sync' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/vga_sync.v:23]
 INFO: [Synth 8-256] done synthesizing module 'vga_sync' (2#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/vga_sync.v:23]
 INFO: [Synth 8-638] synthesizing module 'game_engine' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_engine.v:3]
@@ -39,13 +39,13 @@ INFO: [Synth 8-638] synthesizing module 'menu_fsm' [D:/Y2_ALL/CPE_digital/GAniga
 	Parameter ST_WIN bound to: 2'b11 
 INFO: [Synth 8-226] default block is never used [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/menu_fsm.v:39]
 INFO: [Synth 8-256] done synthesizing module 'menu_fsm' (3#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/menu_fsm.v:3]
-INFO: [Synth 8-638] synthesizing module 'player_control' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_control.v:23]
+INFO: [Synth 8-638] synthesizing module 'player_control' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_control.v:4]
 	Parameter START_X bound to: 320 - type: integer 
 	Parameter START_Y bound to: 440 - type: integer 
 	Parameter SPEED bound to: 4 - type: integer 
 	Parameter PLAYER_W bound to: 16 - type: integer 
 	Parameter SCREEN_W bound to: 640 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'player_control' (4#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_control.v:23]
+INFO: [Synth 8-256] done synthesizing module 'player_control' (4#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/player_control.v:4]
 INFO: [Synth 8-638] synthesizing module 'enemy_control' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_control.v:3]
 	Parameter START_X bound to: 100 - type: integer 
 	Parameter START_Y bound to: 50 - type: integer 
@@ -85,33 +85,6 @@ INFO: [Synth 8-256] done synthesizing module 'enemy_bullet' (7#1) [D:/Y2_ALL/CPE
 INFO: [Synth 8-256] done synthesizing module 'enemy_bullet_manager' (8#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_bullet_manager.v:3]
 INFO: [Synth 8-256] done synthesizing module 'game_engine' (9#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/game_engine.v:3]
 INFO: [Synth 8-638] synthesizing module 'renderer' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/renderer.v:3]
-	Parameter MENU_SCALE bound to: 4 - type: integer 
-	Parameter MENU_LEN bound to: 6 - type: integer 
-	Parameter MENU_W bound to: 192 - type: integer 
-	Parameter MENU_H bound to: 32 - type: integer 
-	Parameter MENU_X0 bound to: 224 - type: integer 
-	Parameter MENU_Y0 bound to: 120 - type: integer 
-	Parameter PROMPT_SCALE bound to: 2 - type: integer 
-	Parameter PROMPT_LEN bound to: 15 - type: integer 
-	Parameter PROMPT_W bound to: 240 - type: integer 
-	Parameter PROMPT_H bound to: 16 - type: integer 
-	Parameter PROMPT_X0 bound to: 200 - type: integer 
-	Parameter PROMPT_Y0 bound to: 300 - type: integer 
-	Parameter OVER_SCALE bound to: 4 - type: integer 
-	Parameter OVER_LEN bound to: 9 - type: integer 
-	Parameter OVER_W bound to: 288 - type: integer 
-	Parameter OVER_H bound to: 32 - type: integer 
-	Parameter OVER_X0 bound to: 176 - type: integer 
-	Parameter OVER_Y0 bound to: 140 - type: integer 
-	Parameter OVERP_SCALE bound to: 2 - type: integer 
-	Parameter OVERP_LEN bound to: 15 - type: integer 
-	Parameter OVERP_W bound to: 240 - type: integer 
-	Parameter OVERP_H bound to: 16 - type: integer 
-	Parameter OVERP_X0 bound to: 200 - type: integer 
-	Parameter OVERP_Y0 bound to: 300 - type: integer 
-	Parameter WIN_LEN bound to: 2 - type: integer 
-	Parameter WIN_W bound to: 64 - type: integer 
-	Parameter WIN_X0 bound to: 288 - type: integer 
 	Parameter BULLET_W bound to: 2 - type: integer 
 	Parameter BULLET_H bound to: 6 - type: integer 
 	Parameter EB_W bound to: 4 - type: integer 
@@ -137,12 +110,48 @@ INFO: [Synth 8-5534] Detected attribute (* rom_style = "block" *) [D:/Y2_ALL/CPE
 INFO: [Synth 8-3876] $readmem data file 'enemy.mem' is read successfully [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_sprite_rom.v:12]
 INFO: [Synth 8-256] done synthesizing module 'enemy_sprite_rom' (13#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_sprite_rom.v:3]
 INFO: [Synth 8-256] done synthesizing module 'enemy_sprite' (14#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/enemy_sprite.v:3]
+INFO: [Synth 8-638] synthesizing module 'screen_menu' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/screen_menu.v:3]
+	Parameter MENU_SCALE bound to: 4 - type: integer 
+	Parameter MENU_W bound to: 192 - type: integer 
+	Parameter MENU_H bound to: 32 - type: integer 
+	Parameter MENU_X0 bound to: 224 - type: integer 
+	Parameter MENU_Y0 bound to: 120 - type: integer 
+	Parameter PROMPT_SCALE bound to: 2 - type: integer 
+	Parameter PROMPT_W bound to: 240 - type: integer 
+	Parameter PROMPT_H bound to: 16 - type: integer 
+	Parameter PROMPT_X0 bound to: 200 - type: integer 
+	Parameter PROMPT_Y0 bound to: 300 - type: integer 
 INFO: [Synth 8-638] synthesizing module 'font8x8_rom' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/font8x8_rom.v:4]
 INFO: [Synth 8-256] done synthesizing module 'font8x8_rom' (15#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/font8x8_rom.v:4]
-INFO: [Synth 8-256] done synthesizing module 'renderer' (16#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/renderer.v:3]
-INFO: [Synth 8-256] done synthesizing module 'top_module' (17#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/top_module.v:3]
+INFO: [Synth 8-256] done synthesizing module 'screen_menu' (16#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/screen_menu.v:3]
+INFO: [Synth 8-638] synthesizing module 'screen_game_over' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/screen_game_over.v:3]
+	Parameter OVER_SCALE bound to: 4 - type: integer 
+	Parameter OVER_W bound to: 288 - type: integer 
+	Parameter OVER_H bound to: 32 - type: integer 
+	Parameter OVER_X0 bound to: 176 - type: integer 
+	Parameter OVER_Y0 bound to: 140 - type: integer 
+	Parameter OVERP_SCALE bound to: 2 - type: integer 
+	Parameter OVERP_W bound to: 240 - type: integer 
+	Parameter OVERP_H bound to: 16 - type: integer 
+	Parameter OVERP_X0 bound to: 200 - type: integer 
+	Parameter OVERP_Y0 bound to: 300 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'screen_game_over' (17#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/screen_game_over.v:3]
+INFO: [Synth 8-638] synthesizing module 'screen_win' [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/screen_win.v:3]
+	Parameter WIN_SCALE bound to: 8 - type: integer 
+	Parameter WIN_W bound to: 128 - type: integer 
+	Parameter WIN_H bound to: 64 - type: integer 
+	Parameter WIN_X0 bound to: 256 - type: integer 
+	Parameter WIN_Y0 bound to: 140 - type: integer 
+	Parameter PROMPT_SCALE bound to: 2 - type: integer 
+	Parameter PROMPT_W bound to: 240 - type: integer 
+	Parameter PROMPT_H bound to: 16 - type: integer 
+	Parameter PROMPT_X0 bound to: 200 - type: integer 
+	Parameter PROMPT_Y0 bound to: 360 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'screen_win' (18#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/screen_win.v:3]
+INFO: [Synth 8-256] done synthesizing module 'renderer' (19#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/renderer.v:3]
+INFO: [Synth 8-256] done synthesizing module 'top_module' (20#1) [D:/Y2_ALL/CPE_digital/GAniga/Ganiga.srcs/sources_1/new/top_module.v:3]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:08 . Memory (MB): peak = 300.066 ; gain = 128.414
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 299.957 ; gain = 128.281
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -152,7 +161,7 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:08 . Memory (MB): peak = 300.066 ; gain = 128.414
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 299.957 ; gain = 128.281
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a35ticpg236-1L
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -192,22 +201,22 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 586.250 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 586.000 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:13 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 586.000 ; gain = 414.324
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35ticpg236-1L
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:13 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 586.000 ; gain = 414.324
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:06 ; elapsed = 00:00:13 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 586.000 ; gain = 414.324
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5545] ROM "counter_r" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
 INFO: [Synth 8-5545] ROM "tick_o" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
@@ -228,14 +237,14 @@ INFO: [Synth 8-5544] ROM "g" won't be mapped to Block RAM because address size (
 INFO: [Synth 8-5544] ROM "b" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5547] Trying to map ROM "rom_memory" into Block RAM due to explicit "ram_style" or "rom_style" specification
 INFO: [Synth 8-5547] Trying to map ROM "rom_memory" into Block RAM due to explicit "ram_style" or "rom_style" specification
-INFO: [Synth 8-5546] ROM "over_fill_g" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "menu_fill_g" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "menu_char" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5587] ROM size for "prompt_char" is below threshold of ROM address width. It will be mapped to LUTs
 INFO: [Synth 8-5587] ROM size for "over_char" is below threshold of ROM address width. It will be mapped to LUTs
-INFO: [Synth 8-5587] ROM size for "over_prompt_char" is below threshold of ROM address width. It will be mapped to LUTs
+INFO: [Synth 8-5587] ROM size for "prompt_char" is below threshold of ROM address width. It will be mapped to LUTs
+INFO: [Synth 8-5587] ROM size for "prompt_char" is below threshold of ROM address width. It will be mapped to LUTs
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:13 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 586.000 ; gain = 414.324
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -252,18 +261,18 @@ Detailed RTL Component Info :
 	   3 Input     13 Bit       Adders := 14    
 	   3 Input     12 Bit       Adders := 14    
 	   2 Input     11 Bit       Adders := 23    
-	   2 Input     10 Bit       Adders := 21    
+	   2 Input     10 Bit       Adders := 26    
 	   4 Input     10 Bit       Adders := 1     
 	   3 Input     10 Bit       Adders := 1     
 	   2 Input      8 Bit       Adders := 2     
 	   3 Input      8 Bit       Adders := 1     
 	   2 Input      7 Bit       Adders := 1     
 	   2 Input      6 Bit       Adders := 1     
-	   2 Input      3 Bit       Adders := 15    
+	   2 Input      3 Bit       Adders := 7     
 	   2 Input      2 Bit       Adders := 1     
 +---XORs : 
 	   4 Input      1 Bit         XORs := 1     
-	   2 Input      1 Bit         XORs := 2     
+	   2 Input      1 Bit         XORs := 6     
 +---Registers : 
 	               32 Bit    Registers := 1     
 	               12 Bit    Registers := 2     
@@ -281,18 +290,19 @@ Detailed RTL Component Info :
 	   6 Input     10 Bit        Muxes := 2     
 	   2 Input      8 Bit        Muxes := 6     
 	   3 Input      8 Bit        Muxes := 1     
-	   8 Input      7 Bit        Muxes := 126   
-	   2 Input      7 Bit        Muxes := 13    
+	   8 Input      7 Bit        Muxes := 84    
+	   2 Input      7 Bit        Muxes := 11    
 	   7 Input      7 Bit        Muxes := 1     
-	  16 Input      7 Bit        Muxes := 2     
+	  16 Input      7 Bit        Muxes := 3     
 	  10 Input      7 Bit        Muxes := 1     
 	   2 Input      6 Bit        Muxes := 2     
-	   8 Input      6 Bit        Muxes := 18    
-	   2 Input      4 Bit        Muxes := 51    
+	   8 Input      6 Bit        Muxes := 12    
+	   2 Input      4 Bit        Muxes := 35    
 	   6 Input      4 Bit        Muxes := 3     
-	   5 Input      4 Bit        Muxes := 2     
-	   2 Input      3 Bit        Muxes := 21    
-	   2 Input      2 Bit        Muxes := 7     
+	   5 Input      4 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 3     
+	   2 Input      3 Bit        Muxes := 13    
+	   2 Input      2 Bit        Muxes := 10    
 	   6 Input      2 Bit        Muxes := 1     
 	   4 Input      2 Bit        Muxes := 1     
 	   3 Input      1 Bit        Muxes := 1     
@@ -449,22 +459,49 @@ Detailed RTL Component Info :
 	   8 Input      7 Bit        Muxes := 14    
 	   2 Input      7 Bit        Muxes := 1     
 	   8 Input      6 Bit        Muxes := 2     
+Module screen_menu 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     10 Bit       Adders := 4     
++---XORs : 
+	   2 Input      1 Bit         XORs := 2     
++---Muxes : 
+	   2 Input      7 Bit        Muxes := 2     
+	   7 Input      7 Bit        Muxes := 1     
+	  16 Input      7 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 3     
+	   5 Input      4 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+Module screen_game_over 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     10 Bit       Adders := 4     
++---XORs : 
+	   2 Input      1 Bit         XORs := 2     
++---Muxes : 
+	   2 Input      7 Bit        Muxes := 2     
+	  10 Input      7 Bit        Muxes := 1     
+	  16 Input      7 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 1     
+Module screen_win 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     10 Bit       Adders := 4     
++---XORs : 
+	   2 Input      1 Bit         XORs := 2     
++---Muxes : 
+	   2 Input      7 Bit        Muxes := 1     
+	  16 Input      7 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 1     
 Module renderer 
 Detailed RTL Component Info : 
 +---Adders : 
 	   3 Input     12 Bit       Adders := 8     
-	   2 Input     10 Bit       Adders := 7     
-	   2 Input      3 Bit       Adders := 8     
-+---XORs : 
-	   2 Input      1 Bit         XORs := 2     
 +---Muxes : 
-	   2 Input      7 Bit        Muxes := 4     
-	   7 Input      7 Bit        Muxes := 1     
-	  16 Input      7 Bit        Muxes := 2     
-	  10 Input      7 Bit        Muxes := 1     
-	   2 Input      4 Bit        Muxes := 38    
-	   5 Input      4 Bit        Muxes := 2     
-	   2 Input      3 Bit        Muxes := 8     
+	   2 Input      4 Bit        Muxes := 15    
+	   4 Input      4 Bit        Muxes := 3     
 ---------------------------------------------------------------------------------
 Finished RTL Hierarchical Component Statistics
 ---------------------------------------------------------------------------------
@@ -477,7 +514,7 @@ BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
 ---------------------------------------------------------------------------------
 Finished Part Resource Summary
 ---------------------------------------------------------------------------------
-Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:07 ; elapsed = 00:00:13 . Memory (MB): peak = 586.250 ; gain = 414.598
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:06 ; elapsed = 00:00:09 . Memory (MB): peak = 586.000 ; gain = 414.324
 ---------------------------------------------------------------------------------
 Start Cross Boundary Optimization
 ---------------------------------------------------------------------------------
@@ -487,9 +524,9 @@ INFO: [Synth 8-5547] Trying to map ROM "p_0_out" into Block RAM due to explicit 
 INFO: [Synth 8-5545] ROM "game_tick_i/counter_r" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
 INFO: [Synth 8-5545] ROM "game_tick_i/tick_o" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
 ---------------------------------------------------------------------------------
-Finished Cross Boundary Optimization : Time (s): cpu = 00:00:08 ; elapsed = 00:00:15 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished Cross Boundary Optimization : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 586.000 ; gain = 414.324
 ---------------------------------------------------------------------------------
-Finished Parallel Reinference  : Time (s): cpu = 00:00:08 ; elapsed = 00:00:15 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished Parallel Reinference  : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 586.000 ; gain = 414.324
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -518,21 +555,21 @@ Finished ROM, RAM, DSP and Shift Register Reporting
 ---------------------------------------------------------------------------------
 Start Area Optimization
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\engine/e_ctrl/move_mode_reg[2] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\engine/p_0_out_inferred /\engine/p_ctrl/x_reg[0] )
-INFO: [Synth 8-3886] merging instance '\engine/e_ctrl/current_max_reg[2] ' (FDPE) to '\engine/e_ctrl/current_max_reg[0] '
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\engine/e_ctrl/enemy_fire_y_reg[0] )
-WARNING: [Synth 8-3332] Sequential element (\engine/p_ctrl/x_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/e_ctrl/current_max_reg[2] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/e_ctrl/move_mode_reg[2] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/e_ctrl/group_x_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/e_ctrl/group_y_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/e_ctrl/enemy_fire_y_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/bullet_inst/bullet_y_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/bullet_inst/bullet_x_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/eb_manager/bullet2/bullet_y_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/eb_manager/bullet1/bullet_y_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/eb_manager/bullet3/bullet_y_reg[0] ) is unused and will be removed from module top_module.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/\e_ctrl/move_mode_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/p_0_out_inferred/\p_ctrl/x_reg[0] )
+INFO: [Synth 8-3886] merging instance 'engine/\e_ctrl/current_max_reg[2] ' (FDPE) to 'engine/\e_ctrl/current_max_reg[0] '
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/\e_ctrl/enemy_fire_y_reg[0] )
+WARNING: [Synth 8-3332] Sequential element (\p_ctrl/x_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\e_ctrl/current_max_reg[2] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\e_ctrl/move_mode_reg[2] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\e_ctrl/group_x_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\e_ctrl/group_y_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\e_ctrl/enemy_fire_y_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\bullet_inst/bullet_y_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\bullet_inst/bullet_x_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\eb_manager/bullet2/bullet_y_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\eb_manager/bullet1/bullet_y_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\eb_manager/bullet3/bullet_y_reg[0] ) is unused and will be removed from module game_engine.
 WARNING: [Synth 8-3332] Sequential element (\frame_cnt_reg[6] ) is unused and will be removed from module renderer.
 WARNING: [Synth 8-3332] Sequential element (\frame_cnt_reg[7] ) is unused and will be removed from module renderer.
 WARNING: [Synth 8-3332] Sequential element (\frame_cnt_reg[8] ) is unused and will be removed from module renderer.
@@ -543,21 +580,21 @@ WARNING: [Synth 8-3332] Sequential element (\frame_cnt_reg[12] ) is unused and w
 WARNING: [Synth 8-3332] Sequential element (\frame_cnt_reg[13] ) is unused and will be removed from module renderer.
 WARNING: [Synth 8-3332] Sequential element (\frame_cnt_reg[14] ) is unused and will be removed from module renderer.
 WARNING: [Synth 8-3332] Sequential element (\frame_cnt_reg[15] ) is unused and will be removed from module renderer.
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\engine/e_ctrl/enemy_fire_x_reg[0] )
-WARNING: [Synth 8-3332] Sequential element (\engine/e_ctrl/enemy_fire_x_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/eb_manager/bullet2/bullet_x_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/eb_manager/bullet1/bullet_x_reg[0] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/eb_manager/bullet3/bullet_x_reg[0] ) is unused and will be removed from module top_module.
-INFO: [Synth 8-3886] merging instance '\engine/e_ctrl/move_timer_reg[5] ' (FDCE) to '\engine/e_ctrl/move_timer_reg[3] '
-INFO: [Synth 8-3886] merging instance '\engine/e_ctrl/move_timer_reg[3] ' (FDCE) to '\engine/e_ctrl/move_timer_reg[4] '
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\engine/e_ctrl/move_timer_reg[4] )
-WARNING: [Synth 8-3332] Sequential element (\engine/e_ctrl/move_timer_reg[5] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/e_ctrl/move_timer_reg[4] ) is unused and will be removed from module top_module.
-WARNING: [Synth 8-3332] Sequential element (\engine/e_ctrl/move_timer_reg[3] ) is unused and will be removed from module top_module.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/\e_ctrl/enemy_fire_x_reg[0] )
+WARNING: [Synth 8-3332] Sequential element (\e_ctrl/enemy_fire_x_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\eb_manager/bullet2/bullet_x_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\eb_manager/bullet1/bullet_x_reg[0] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\eb_manager/bullet3/bullet_x_reg[0] ) is unused and will be removed from module game_engine.
+INFO: [Synth 8-3886] merging instance 'engine/\e_ctrl/move_timer_reg[5] ' (FDCE) to 'engine/\e_ctrl/move_timer_reg[3] '
+INFO: [Synth 8-3886] merging instance 'engine/\e_ctrl/move_timer_reg[3] ' (FDCE) to 'engine/\e_ctrl/move_timer_reg[4] '
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/\e_ctrl/move_timer_reg[4] )
+WARNING: [Synth 8-3332] Sequential element (\e_ctrl/move_timer_reg[5] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\e_ctrl/move_timer_reg[4] ) is unused and will be removed from module game_engine.
+WARNING: [Synth 8-3332] Sequential element (\e_ctrl/move_timer_reg[3] ) is unused and will be removed from module game_engine.
 ---------------------------------------------------------------------------------
-Finished Area Optimization : Time (s): cpu = 00:00:10 ; elapsed = 00:00:17 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished Area Optimization : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 586.000 ; gain = 414.324
 ---------------------------------------------------------------------------------
-Finished Parallel Area Optimization  : Time (s): cpu = 00:00:10 ; elapsed = 00:00:17 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished Parallel Area Optimization  : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 586.000 ; gain = 414.324
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -571,10 +608,10 @@ Start Timing Optimization
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:22 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 586.000 ; gain = 414.324
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:22 . Memory (MB): peak = 586.250 ; gain = 414.598
+Finished Timing Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 587.410 ; gain = 415.734
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -588,16 +625,16 @@ Start Technology Mapping
 INFO: [Synth 8-4480] The timing for the instance \ren/spr_player/player_rom/data_reg  (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 INFO: [Synth 8-4480] The timing for the instance \ren/spr_enemy/enemy_rom/data_reg  (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:15 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished Technology Mapping : Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 634.652 ; gain = 462.977
 ---------------------------------------------------------------------------------
-Finished Parallel Technology Mapping Optimization  : Time (s): cpu = 00:00:15 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished Parallel Technology Mapping Optimization  : Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 634.652 ; gain = 462.977
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
 | |RTL Partition |Replication |Instances |
 +-+--------------+------------+----------+
 +-+--------------+------------+----------+
-Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:15 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 634.652 ; gain = 462.977
 ---------------------------------------------------------------------------------
 Start IO Insertion
 ---------------------------------------------------------------------------------
@@ -614,7 +651,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished IO Insertion : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 634.652 ; gain = 462.977
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -627,7 +664,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 634.652 ; gain = 462.977
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -639,25 +676,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 634.652 ; gain = 462.977
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 634.652 ; gain = 462.977
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 634.652 ; gain = 462.977
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 634.652 ; gain = 462.977
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -675,51 +712,50 @@ Report Cell Usage:
 +------+-----------+------+
 |1     |BUFG       |     1|
 |2     |CARRY4     |   217|
-|3     |LUT1       |   121|
-|4     |LUT2       |   393|
-|5     |LUT3       |   228|
-|6     |LUT4       |   415|
-|7     |LUT5       |   291|
-|8     |LUT6       |   572|
-|9     |MUXF7      |    33|
-|10    |MUXF8      |     1|
-|11    |RAMB18E1   |     1|
-|12    |RAMB18E1_1 |     1|
-|13    |FDCE       |    66|
-|14    |FDPE       |    18|
-|15    |FDRE       |   174|
-|16    |IBUF       |     5|
-|17    |OBUF       |    14|
+|3     |LUT1       |   124|
+|4     |LUT2       |   401|
+|5     |LUT3       |   200|
+|6     |LUT4       |   404|
+|7     |LUT5       |   279|
+|8     |LUT6       |   498|
+|9     |MUXF7      |    10|
+|10    |RAMB18E1   |     1|
+|11    |RAMB18E1_1 |     1|
+|12    |FDCE       |    66|
+|13    |FDPE       |    18|
+|14    |FDRE       |   174|
+|15    |IBUF       |     5|
+|16    |OBUF       |    14|
 +------+-----------+------+
 
 Report Instance Areas: 
 +------+-----------------+---------------------+------+
 |      |Instance         |Module               |Cells |
 +------+-----------------+---------------------+------+
-|1     |top              |                     |  2551|
-|2     |  engine         |game_engine          |  1409|
-|3     |    bullet_inst  |bullet               |   170|
-|4     |    e_ctrl       |enemy_control        |   799|
+|1     |top              |                     |  2413|
+|2     |  engine         |game_engine          |  1391|
+|3     |    bullet_inst  |bullet               |   173|
+|4     |    e_ctrl       |enemy_control        |   794|
 |5     |    eb_manager   |enemy_bullet_manager |   316|
-|6     |      bullet1    |enemy_bullet         |   106|
-|7     |      bullet2    |enemy_bullet_0       |   105|
+|6     |      bullet1    |enemy_bullet         |   105|
+|7     |      bullet2    |enemy_bullet_0       |   106|
 |8     |      bullet3    |enemy_bullet_1       |   105|
 |9     |    p_ctrl       |player_control       |    94|
-|10    |    u_menu       |menu_fsm             |    30|
+|10    |    u_menu       |menu_fsm             |    14|
 |11    |  game_tick_i    |game_tick            |   113|
-|12    |  ren            |renderer             |    73|
-|13    |    spr_enemy    |enemy_sprite         |    48|
-|14    |      enemy_rom  |enemy_sprite_rom     |    28|
-|15    |    spr_player   |player_sprite        |    11|
-|16    |      player_rom |player_sprite_rom    |     8|
-|17    |  vga_driver     |vga_sync             |   909|
+|12    |  ren            |renderer             |    76|
+|13    |    spr_enemy    |enemy_sprite         |    46|
+|14    |      enemy_rom  |enemy_sprite_rom     |    26|
+|15    |    spr_player   |player_sprite        |    16|
+|16    |      player_rom |player_sprite_rom    |    14|
+|17    |  vga_driver     |vga_sync             |   761|
 +------+-----------------+---------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 634.652 ; gain = 462.977
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 28 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 630.715 ; gain = 156.703
-Synthesis Optimization Complete : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 630.715 ; gain = 459.063
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 634.652 ; gain = 160.977
+Synthesis Optimization Complete : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 634.652 ; gain = 462.977
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 224 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -729,8 +765,8 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-93 Infos, 36 Warnings, 8 Critical Warnings and 0 Errors encountered.
+99 Infos, 36 Warnings, 8 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 630.715 ; gain = 443.195
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 630.715 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Tue Dec 16 16:34:46 2025...
+synth_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 634.652 ; gain = 447.105
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 634.652 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 16 17:12:25 2025...

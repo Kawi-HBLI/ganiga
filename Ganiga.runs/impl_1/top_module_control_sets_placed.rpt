@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-| Date         : Tue Dec 16 16:35:10 2025
+| Date         : Tue Dec 16 17:12:50 2025
 | Host         : Kawiii running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_module_control_sets_placed.rpt
 | Design       : top_module
@@ -23,7 +23,7 @@ Table of Contents
 |                               Status                              | Count |
 +-------------------------------------------------------------------+-------+
 | Number of unique control sets                                     |    20 |
-| Minimum Number of register sites lost to control set restrictions |   110 |
+| Minimum Number of register sites lost to control set restrictions |   118 |
 +-------------------------------------------------------------------+-------+
 
 
@@ -33,12 +33,12 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              30 |           15 |
-| No           | No                    | Yes                    |              18 |           11 |
-| No           | Yes                   | No                     |              46 |           23 |
+| No           | No                    | No                     |              33 |           15 |
+| No           | No                    | Yes                    |              18 |           10 |
+| No           | Yes                   | No                     |              43 |           23 |
 | Yes          | No                    | No                     |               6 |            2 |
-| Yes          | No                    | Yes                    |              66 |           25 |
-| Yes          | Yes                   | No                     |              92 |           37 |
+| Yes          | No                    | Yes                    |              66 |           24 |
+| Yes          | Yes                   | No                     |              92 |           38 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -49,25 +49,25 @@ Table of Contents
 |     Clock Signal     |                   Enable Signal                  |        Set/Reset Signal       | Slice Load Count | Bel Load Count |
 +----------------------+--------------------------------------------------+-------------------------------+------------------+----------------+
 |  CLK100MHZ_IBUF_BUFG | vga_driver/frame_cnt0                            |                               |                2 |              6 |
-|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/lfsr                               | engine/u_menu/p_0_in          |                3 |              8 |
-|  CLK100MHZ_IBUF_BUFG | engine/p_ctrl/x[9]_i_1_n_0                       | engine/u_menu/p_0_in          |                3 |              9 |
-|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/group_y[9]_i_1_n_0                 | engine/u_menu/p_0_in          |                5 |              9 |
-|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet3/bullet_y[9]_i_1__2_n_0 | engine/u_menu/p_0_in          |                3 |              9 |
-|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet3/bullet_x[9]_i_1__2_n_0 | engine/u_menu/p_0_in          |                4 |              9 |
-|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet2/bullet_y[9]_i_1__1_n_0 | engine/u_menu/p_0_in          |                5 |              9 |
-|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet2/bullet_x[9]_i_1__1_n_0 | engine/u_menu/p_0_in          |                3 |              9 |
-|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet1/p_1_in                 | engine/u_menu/p_0_in          |                4 |              9 |
-|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet1/active0                | engine/u_menu/p_0_in          |                4 |              9 |
-|  CLK100MHZ_IBUF_BUFG | engine/bullet_inst/bullet_y[9]_i_1_n_0           | engine/u_menu/p_0_in          |                3 |              9 |
-|  CLK100MHZ_IBUF_BUFG | engine/bullet_inst/active0                       | engine/u_menu/p_0_in          |                7 |              9 |
-|  CLK100MHZ_IBUF_BUFG | vga_driver/xc_next0                              | vga_driver/yc_next[9]_i_1_n_0 |                2 |             10 |
-|  CLK100MHZ_IBUF_BUFG | vga_driver/xc_next[9]_i_2_n_0                    | vga_driver/xc_next0           |                2 |             10 |
-|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/group_x[9]_i_1_n_0                 | engine/u_menu/p_0_in          |                5 |             11 |
-|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/fire_timer                         | engine/u_menu/p_0_in          |                3 |             11 |
-|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/enemy_fire_i_1_n_0                 | engine/u_menu/p_0_in          |                6 |             18 |
-|  CLK100MHZ_IBUF_BUFG |                                                  | engine/u_menu/p_0_in          |               18 |             26 |
-|  CLK100MHZ_IBUF_BUFG |                                                  |                               |               15 |             30 |
-|  CLK100MHZ_IBUF_BUFG |                                                  | BTNC_IBUF                     |               16 |             38 |
+|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/lfsr                               | engine/u_menu/x_reg[9]        |                2 |              8 |
+|  CLK100MHZ_IBUF_BUFG | engine/p_ctrl/x[9]_i_1_n_0                       | engine/u_menu/x_reg[9]        |                3 |              9 |
+|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/group_y[9]_i_1_n_0                 | engine/u_menu/x_reg[9]        |                4 |              9 |
+|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet3/bullet_y[9]_i_1__2_n_0 | engine/u_menu/x_reg[9]        |                3 |              9 |
+|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet3/bullet_x[9]_i_1__2_n_0 | engine/u_menu/x_reg[9]        |                4 |              9 |
+|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet2/bullet_y[9]_i_1__1_n_0 | engine/u_menu/x_reg[9]        |                4 |              9 |
+|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet2/bullet_x[9]_i_1__1_n_0 | engine/u_menu/x_reg[9]        |                3 |              9 |
+|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet1/p_1_in                 | engine/u_menu/x_reg[9]        |                4 |              9 |
+|  CLK100MHZ_IBUF_BUFG | engine/eb_manager/bullet1/active0                | engine/u_menu/x_reg[9]        |                3 |              9 |
+|  CLK100MHZ_IBUF_BUFG | engine/bullet_inst/bullet_y[9]_i_1_n_0           | engine/u_menu/x_reg[9]        |                3 |              9 |
+|  CLK100MHZ_IBUF_BUFG | engine/bullet_inst/active0                       | engine/u_menu/x_reg[9]        |                6 |              9 |
+|  CLK100MHZ_IBUF_BUFG | vga_driver/xc_next0                              | vga_driver/yc_next[9]_i_1_n_0 |                4 |             10 |
+|  CLK100MHZ_IBUF_BUFG | vga_driver/xc_next[9]_i_2_n_0                    | vga_driver/xc_next0           |                4 |             10 |
+|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/group_x[9]_i_1_n_0                 | engine/u_menu/x_reg[9]        |                5 |             11 |
+|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/fire_timer                         | engine/u_menu/x_reg[9]        |                3 |             11 |
+|  CLK100MHZ_IBUF_BUFG | engine/e_ctrl/enemy_fire_i_1_n_0                 | engine/u_menu/x_reg[9]        |                7 |             18 |
+|  CLK100MHZ_IBUF_BUFG |                                                  | engine/u_menu/x_reg[9]        |               17 |             26 |
+|  CLK100MHZ_IBUF_BUFG |                                                  |                               |               15 |             33 |
+|  CLK100MHZ_IBUF_BUFG |                                                  | BTNC_IBUF                     |               16 |             35 |
 +----------------------+--------------------------------------------------+-------------------------------+------------------+----------------+
 
 

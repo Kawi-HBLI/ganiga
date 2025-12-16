@@ -3,8 +3,8 @@
 module enemy_control #(
     parameter START_X = 100,
     parameter START_Y = 50,
-    parameter ENEMY_W = 32,
-    parameter ENEMY_H = 32,
+    parameter ENEMY_W = 24, 
+    parameter ENEMY_H = 24, 
     parameter GAP     = 16,
     parameter COUNT   = 8, 
     
@@ -31,7 +31,6 @@ module enemy_control #(
     output reg       victory
 );
     reg [5:0] move_timer;
-    reg       move_dir; 
     
     reg [7:0] fire_timer;
     reg [7:0] lfsr;
@@ -59,7 +58,6 @@ module enemy_control #(
             found = 1'b0;
             idx = (start >= COUNT) ? (start - COUNT) : start;
             pick_alive_idx = 3'd0;
-    
             for (k = 0; k < COUNT; k = k + 1) begin
                 if (!found && alive[idx]) begin
                     pick_alive_idx = idx;
@@ -71,9 +69,9 @@ module enemy_control #(
         end
     endfunction
 
-    localparam integer FIRE_DELAY_MIN = 30;
-    localparam integer FIRE_DELAY_MAX = 90; 
-    localparam integer ENEMY_CENTER_X_OFF = (ENEMY_W/2);
+    localparam integer FIRE_DELAY_MIN = 20;
+    localparam integer FIRE_DELAY_MAX = 60;
+    localparam integer ENEMY_CENTER_X_OFF = (ENEMY_W/2) - 2; 
     localparam integer ENEMY_MUZZLE_Y_OFF  = ENEMY_H;
 
     always @(posedge clk or negedge rst_ni) begin
@@ -86,7 +84,6 @@ module enemy_control #(
             group_x       <= 208;
             group_y       <= START_Y;
             move_timer    <= 0;
-            move_dir      <= 0;
             bullet_hit_ack <= 0;
             enemy_fire    <= 1'b0;
             enemy_fire_x  <= 10'd0;
@@ -118,7 +115,6 @@ module enemy_control #(
                 if (wave_stage < 2) begin
                     group_y       <= START_Y;
                     move_timer    <= 0;
-                    move_dir      <= 0;
                     fire_timer    <= 8'd0;
                 end
             end
@@ -127,7 +123,13 @@ module enemy_control #(
 
                 if (move_timer >= MOVE_DELAY) begin
                     move_timer <= 0;
-                    move_mode <= lfsr[2:0] % 5;
+                    case (lfsr[2:0])
+                        3'd0, 3'd1, 3'd2: move_mode <= DIR_RIGHT;
+                        3'd3, 3'd4, 3'd5: move_mode <= DIR_LEFT;
+                        3'd6:             move_mode <= DIR_UP;
+                        3'd7:             move_mode <= DIR_DOWN;
+                    endcase
+
                     case (move_mode)
                         DIR_RIGHT: begin
                             if (group_x < 640 - (current_max*(ENEMY_W+GAP)) - 20)

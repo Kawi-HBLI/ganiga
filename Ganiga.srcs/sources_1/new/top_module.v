@@ -12,28 +12,51 @@ module top_module(
     output [3:0] GREEN,
     output [3:0] BLUE
 );
-    wire rst_ni = ~BTNC;
-    wire tick;
 
+    // --- System Signals ---
+    wire rst_ni = ~BTNC; // Active Low Reset
+    wire tick;           // 60Hz Game Tick
+
+    // --- Game Parameters (Speed Tuning) ---
     localparam integer ENEMY_MOVE_DELAY = 5; 
     localparam integer ENEMY_STEP_X     = 2;
     localparam integer ENEMY_STEP_Y     = 10;
 
+    // --- VGA Signals ---
     wire [9:0] x, y;
     wire blank;
 
+    // --- Internal Game Wires ---
+    // Player
     wire [9:0] p_x, p_y;
+    
+    // Player Bullet
     wire       b_active;
     wire [9:0] b_x, b_y;
-    wire       eb_active;
-    wire [9:0] eb_x, eb_y;
+    
+    // Enemy Bullets (3 Slots)
+    wire       eb1_act;
+    wire [9:0] eb1_x, eb1_y;
+    
+    wire       eb2_act;
+    wire [9:0] eb2_x, eb2_y;
+    
+    wire       eb3_act;
+    wire [9:0] eb3_x, eb3_y;
+    
+    // Enemies
     wire [7:0] en_alive; 
     wire [9:0] en_grp_x, en_grp_y;
+    
+    // Game State
     wire       game_playing;
     wire       game_over;
     wire       game_won; 
     wire [1:0] game_state;
 
+    // -------------------------------------------------------------------------
+    // 1. Clock & Sync Modules
+    // -------------------------------------------------------------------------
     game_tick #(
         .CLK_HZ (100_000_000),
         .TICK_HZ(60)
@@ -45,10 +68,16 @@ module top_module(
 
     vga_sync vga_driver (
         .clk(CLK100MHZ),
-        .HS(HS), .VS(VS),
-        .x(x), .y(y), .blank(blank)
+        .HS(HS), 
+        .VS(VS),
+        .x(x), 
+        .y(y), 
+        .blank(blank)
     );
 
+    // -------------------------------------------------------------------------
+    // 2. Game Engine (Logic Center)
+    // -------------------------------------------------------------------------
     game_engine #(
         .ENEMY_MOVE_DELAY(ENEMY_MOVE_DELAY),
         .ENEMY_STEP_X(ENEMY_STEP_X),
@@ -57,45 +86,76 @@ module top_module(
         .clk(CLK100MHZ),
         .rst_ni(rst_ni),
         .tick(tick),
+        
+        // Inputs
         .btn_left(BTNL),
         .btn_right(BTNR),
         .btn_fire(BTNU),
+        
+        // State Outputs
         .game_state(game_state),
         .game_playing(game_playing),
         .game_over(game_over),
         .game_won(game_won), 
+        
+        // Player Outputs
         .player_x(p_x),
         .player_y(p_y),
+        
+        // Player Bullet Outputs
         .bullet_active(b_active),
         .bullet_x(b_x),
         .bullet_y(b_y),
-        .enemy_bullet_active(eb_active),
-        .enemy_bullet_x(eb_x),
-        .enemy_bullet_y(eb_y),
+        
+        // Enemy Bullets Outputs (3 Slots)
+        .eb1_active(eb1_act), .eb1_x(eb1_x), .eb1_y(eb1_y),
+        .eb2_active(eb2_act), .eb2_x(eb2_x), .eb2_y(eb2_y),
+        .eb3_active(eb3_act), .eb3_x(eb3_x), .eb3_y(eb3_y),
+        
+        // Enemy Group Outputs
         .enemies_alive(en_alive),
         .enemy_group_x(en_grp_x),
         .enemy_group_y(en_grp_y)
     );
 
+    // -------------------------------------------------------------------------
+    // 3. Renderer (Graphics)
+    // -------------------------------------------------------------------------
     renderer ren (
         .clk(CLK100MHZ),
         .blank(blank),
-        .x(x), .y(y),
+        .x(x), 
+        .y(y),
+        
+        // State Inputs
         .game_state(game_state),
         .game_playing(game_playing),
         .game_over(game_over),
         .game_won(game_won), 
+        
+        // Player Inputs
         .player_x(p_x),
         .player_y(p_y),
+        
+        // Player Bullet Inputs
         .bullet_active(b_active),
         .bullet_x(b_x),
         .bullet_y(b_y),
-        .enemy_bullet_active(eb_active),
-        .enemy_bullet_x(eb_x),
-        .enemy_bullet_y(eb_y),
+        
+        // Enemy Bullets Inputs (3 Slots)
+        .eb1_active(eb1_act), .eb1_x(eb1_x), .eb1_y(eb1_y),
+        .eb2_active(eb2_act), .eb2_x(eb2_x), .eb2_y(eb2_y),
+        .eb3_active(eb3_act), .eb3_x(eb3_x), .eb3_y(eb3_y),
+
+        // Enemy Group Inputs
         .enemies_alive(en_alive),
         .enemy_group_x(en_grp_x),
         .enemy_group_y(en_grp_y),
-        .r(RED), .g(GREEN), .b(BLUE)
+        
+        // Color Outputs
+        .r(RED), 
+        .g(GREEN), 
+        .b(BLUE)
     );
+
 endmodule

@@ -17,9 +17,11 @@ module game_engine #(
     output wire       bullet_active,
     output wire [9:0] bullet_x,
     output wire [9:0] bullet_y,
-    output wire       enemy_bullet_active,
-    output wire [9:0] enemy_bullet_x,
-    output wire [9:0] enemy_bullet_y,
+
+    output wire       eb1_active, output wire [9:0] eb1_x, output wire [9:0] eb1_y,
+    output wire       eb2_active, output wire [9:0] eb2_x, output wire [9:0] eb2_y,
+    output wire       eb3_active, output wire [9:0] eb3_x, output wire [9:0] eb3_y,
+
     output wire [7:0] enemies_alive, 
     output wire [9:0] enemy_group_x,
     output wire [9:0] enemy_group_y,
@@ -94,36 +96,35 @@ module game_engine #(
     assign bullet_x = b_x_raw;
     assign bullet_y = b_y_raw;
 
-    wire e_act_raw;
-    wire [9:0] e_x_raw, e_y_raw;
-    wire player_box_hit = e_act_raw &&
-                          (e_x_raw + 2 >= player_x) &&
-                          (e_x_raw < player_x + 16) &&
-                          (e_y_raw + 6 >= player_y) &&
-                          (e_y_raw < player_y + 16);
+    reg trig_1, trig_2, trig_3;
+    
+    always @(*) begin
+        trig_1 = 0; trig_2 = 0; trig_3 = 0;
+        if (enemy_fire) begin
+            if (!eb1_active)      trig_1 = 1;
+            else if (!eb2_active) trig_2 = 1;
+            else if (!eb3_active) trig_3 = 1;
+        end
+    end
 
-    assign player_hit = player_box_hit;
+    function check_hit;
+        input act;
+        input [9:0] bx, by, px, py;
+        begin
+            check_hit = act &&
+                        (bx + 4 >= px) && (bx < px + 16) &&
+                        (by + 8 >= py) && (by < py + 16);
+        end
+    endfunction
 
-    enemy_bullet #(
-        .BULLET_W(2),
-        .BULLET_H(6),
-        .SPEED_Y(6),
-        .SCREEN_H(480)
-    ) enemy_bullet_i (
-        .clk(clk),
-        .rst_ni(rst_game_ni),
-        .tick(tick),
-        .enemy_fire(enemy_fire),
-        .spawn_x(enemy_fire_x),
-        .spawn_y(enemy_fire_y),
-        .hit(player_box_hit),
-        .active(e_act_raw),
-        .bullet_x(e_x_raw),
-        .bullet_y(e_y_raw)
-    );
+    wire hit1 = check_hit(eb1_active, eb1_x, eb1_y, player_x, player_y);
+    wire hit2 = check_hit(eb2_active, eb2_x, eb2_y, player_x, player_y);
+    wire hit3 = check_hit(eb3_active, eb3_x, eb3_y, player_x, player_y);
+    
+    assign player_hit = hit1 | hit2 | hit3;
 
-    assign enemy_bullet_active = e_act_raw;
-    assign enemy_bullet_x = e_x_raw;
-    assign enemy_bullet_y = e_y_raw;
+    enemy_bullet eb1 (.clk(clk), .rst_ni(rst_game_ni), .tick(tick), .enemy_fire(trig_1), .spawn_x(enemy_fire_x), .spawn_y(enemy_fire_y), .hit(hit1), .active(eb1_active), .bullet_x(eb1_x), .bullet_y(eb1_y));
+    enemy_bullet eb2 (.clk(clk), .rst_ni(rst_game_ni), .tick(tick), .enemy_fire(trig_2), .spawn_x(enemy_fire_x), .spawn_y(enemy_fire_y), .hit(hit2), .active(eb2_active), .bullet_x(eb2_x), .bullet_y(eb2_y));
+    enemy_bullet eb3 (.clk(clk), .rst_ni(rst_game_ni), .tick(tick), .enemy_fire(trig_3), .spawn_x(enemy_fire_x), .spawn_y(enemy_fire_y), .hit(hit3), .active(eb3_active), .bullet_x(eb3_x), .bullet_y(eb3_y));
 
 endmodule

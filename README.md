@@ -139,7 +139,7 @@ Here are some visual captures of the hardware-rendered screens in Ganiga, showca
 ### Game Assets
 |Background Tile Map Render|
 | :---: |
-|<img src="images/tile_map_render.png" width="400" alt="Tile Map Render">|
+|<img src="images/tile_map_render.png" width="800" alt="Tile Map Render">|
 
 ---
 

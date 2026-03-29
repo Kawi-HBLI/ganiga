@@ -1,0 +1,12 @@
+# Vivado-specific ignore files
+*.jou
+*.log
+*.str
+*.pb
+*.wdb
+.Xil/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+*.runs/
